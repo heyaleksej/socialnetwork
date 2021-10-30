@@ -6,23 +6,10 @@
 
   grid-template-rows: 60px 1fr;
   grid-auto-columns: 2fr 10fr;  /*{1 колонка 2 фракции другая 10}*/
-  grid-gap: 10px;
-}
-.header{
-  grid-area: h;
-  background: green;
+  /*grid-gap: 10px;*/
 }
 
-.nav{
-  grid-area: n;
-  background: gray;
-}
 
-.content{
-  grid-area:c;
-  background: aqua;
-}
 
-.header img{
-  width: 60px;
-}
+
+
