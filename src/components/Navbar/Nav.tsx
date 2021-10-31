@@ -6,7 +6,10 @@ const Nav =()=>{
    return (
        <nav className={s.nav}>
            <div className={s.item}>
-               <a>Profile</a>
+               <a href="/profile">Profile</a>
+           </div>
+           <div className={s.item}>
+               <a href="/dialogs">Messages</a>
            </div>
            <div className={s.nav}>
                <a>Music</a>
