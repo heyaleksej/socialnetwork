@@ -1,4 +1,25 @@
-.content{
-    grid-area:c;
-    background: aqua;
-    background-size: auto}
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+
+}
+
+.dialogsItems {
+    padding: 15px;
+
+}
+
+.dialogsItems .active {
+    color: gold;
+}
+
+
+.messages {
+    padding: 15px;
+
+
+}
+
+.messages .message {
+
+}
