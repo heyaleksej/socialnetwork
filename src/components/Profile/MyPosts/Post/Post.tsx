@@ -8,7 +8,7 @@ const Post = (props:any) => {
             <img src={'https://topmsg.ru/wp-content/uploads/anonymous.jpg'}/>
             {props.title}
             <div>
-                <span>{props.like}</span>
+                <span>Like{props.like}</span>
             </div>
         </div>);
 

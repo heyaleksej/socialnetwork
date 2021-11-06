@@ -3,17 +3,21 @@ import s from './MyPosts.module.css'
 import Post from "./Post/Post";
 
 
-const MyPosts = () => {
+const MyPosts = (props:any) => {
+
     return (
         <div className={s.postBlock}>
             <h3> My Posts</h3>
             <div>
-                <textarea> </textarea>
-                <button>Add Post</button>
+                <div>
+                    <textarea> </textarea>
+                </div>
+                <div>
+                    <button>Add Post</button>
+                </div>
             </div>
             <div className={s.posts}>
-            <Post title='hello' like={'like(2)'}/>
-            <Post title='postav like pliz' like={'like(5)'}/>
+                {props.posts}
             </div>
         </div>);
 }
