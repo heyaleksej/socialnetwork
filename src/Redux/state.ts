@@ -1,25 +1,39 @@
+import {ChangeEvent} from "react";
+import {addPostActionCreator, onPostChangeActionCreator, profileReducer} from "./profileReducer";
+import {addMessageActionCreator, dialogsReducer, onMessageChangeActionCreator} from "./dialogsReducer";
+
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: (state: RootStateType) => void
-    updateNewPostText: (newPostText: string) => void
-    addPost: (postMessage: string) => void
     subscribe: (observer: any) => void
     getState: () => RootStateType
-    dispatch:(action:ActionsTypes)=>void
+    dispatch: (action: ActionsTypes) => void
 
 }
 
-type AddPostActionType={
-    type:'ADD-POST'
-    newPost: string
-}
+type AddPostActionType = ReturnType<typeof addPostActionCreator>
+type UpdateNewPostTextType = ReturnType<typeof onPostChangeActionCreator>
+type AddMessageActionType = ReturnType<typeof addMessageActionCreator>
+type onMessageChangeType = ReturnType<typeof onMessageChangeActionCreator>
 
-type UpdateNewPostTextType={
-    type:'UPDATE-NEW-POST-TEXT'
-    newPostText: string
-}
+//      {
+//     type:string
+//     newPost: string
+// }
 
-export type ActionsTypes= AddPostActionType | UpdateNewPostTextType
+//     type:string
+//     newPostText: string
+// }
+
+
+
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextType | AddMessageActionType | onMessageChangeType
+
+
+
+
+
 
 let store: StoreType = {
     _state: {
@@ -48,7 +62,9 @@ let store: StoreType = {
                 {id: 3, text: 'da ladno'},
                 {id: 4, text: ' i fuzherchiki'},
                 {id: 5, text: 'ponyal'}
-            ]
+            ],
+            newTextMessage: '',
+
         },
         sidebar: {}
 
@@ -60,40 +76,19 @@ let store: StoreType = {
     },
     _callSubscriber(state: RootStateType) {
     },
-    updateNewPostText(newPostText: string) {
-        // this._state.profilePage.newPostText = newPostText
-        // this._callSubscriber(this._state)
-    },
-    addPost(postMessage: string) {
-        // let newPost: PostsType = {
-        //     id: 5,
-        //     message: this._state.profilePage.newPostText,
-        //     like: 0
-        // }
-        // this._state.profilePage.posts.push(newPost)
-        // this._state.profilePage.newPostText = ''
-        //
-        // this._callSubscriber(this._state)
-    },
+
     subscribe(observer: any) {    //
         this._callSubscriber = observer
     },
-    dispatch(action){ // {type: 'ADD-POST'}
-        if(action.type === 'ADD-POST'){
-            let newPost: PostsType = {
-                id: 5,
-                message: action.newPost,
-                like: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
+    dispatch(action) { // {type: 'ADD-POST'}
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage,action);
+        this._callSubscriber(this._state)
 
-            this._callSubscriber(this._state)
-        } else if(action.type === 'UPDATE-NEW-POST-TEXT'){
-            this._state.profilePage.newPostText = action.newPostText
-            this._callSubscriber(this._state)
+
         }
-    }
+
+
 
 
 }
@@ -125,6 +120,8 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
+    newTextMessage: string
+
 }
 
 export type SidebarType = {}
