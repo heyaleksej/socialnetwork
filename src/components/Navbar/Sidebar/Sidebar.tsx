@@ -1,5 +1,5 @@
 import React from 'react';
-import {DialogsPageType, DialogsType} from "../../../Redux/state";
+import {DialogsPageType, DialogsType} from "../../../Redux/store";
 import Dialog from "../../Dialogs/Dialogs/Dialog";
 import Friends from './Friends';
 import s from './Sidebar.module.css'
