@@ -1,10 +1,20 @@
-import {ActionsTypes, DialogsType, MessageType} from "./store";
+import {ActionsTypes} from "./store";
 import {v1} from "uuid";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
 
-type initialStateType = {
+export type MessageType = {
+    id: string
+    text: string
+}
+
+export type DialogsType = {
+    id: string
+    name: string
+    ava: string
+}
+export type initialStateType = {
     dialogs: Array<DialogsType>
     messages: Array<MessageType>
     newTextMessage: string
@@ -17,14 +27,14 @@ let initialState = {
         {id: v1(), name: 'Polly', ava: 'https://s00.yaplakal.com/pics/pics_original/4/4/9/10477944.jpg'},
         {id: v1(), name: 'Katya', ava: 'https://www.meme-arsenal.com/memes/92ffd0b4948f3bf93d7df8e58006e879.jpg'},
         {id: v1(), name: 'Sergey', ava: 'https://www.meme-arsenal.com/memes/6cc2c9676b78a3a6690b48c41e936660.jpg'}
-    ],
+    ] as DialogsType[],
     messages: [
         {id: v1(), text: 'privetik'},
         {id: v1(), text: 'pochemu ignor'},
         {id: v1(), text: 'da ladno'},
         {id: v1(), text: ' i fuzherchiki'},
         {id: v1(), text: 'ponyal'}
-    ],
+    ] as MessageType[],
     newTextMessage: ''
 }
 
@@ -34,20 +44,20 @@ export const dialogsReducer = (state: initialStateType = initialState, action: A
         case ADD_MESSAGE:
             let newMessage: MessageType = {
                 id: v1(),
-                text: action.newMessage,
+                text: state.newTextMessage,
             }
-            state.messages.push(newMessage)
-            state.newTextMessage = '';
-            return state;
+            return {...state , newTextMessage:'', messages: [...state.messages, newMessage]};
         case UPDATE_NEW_MESSAGE_TEXT :
-            state.newTextMessage = action.newTextMessage
-            return state;
+            return {
+                ...state,
+                newTextMessage: action.newTextMessage
+            };
         default:
             return state;
     }
 }
 
-export const addMessageActionCreator = (newMessage: string) => ({type: ADD_MESSAGE, newMessage: newMessage} as const)
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
 export const onMessageChangeActionCreator = (newTextMessage: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_TEXT,

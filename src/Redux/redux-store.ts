@@ -11,14 +11,14 @@ type ReducersType= typeof reducers
 export type AppStateType =ReturnType<ReducersType>
 */
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
 });
 
-export type AppStateType = ReturnType<typeof reducers>
+export type AppStateType = ReturnType<typeof rootReducer>
 
-let store: Store<AppStateType> = createStore(reducers);
+let store: Store<AppStateType> = createStore(rootReducer);
 
 export default store;

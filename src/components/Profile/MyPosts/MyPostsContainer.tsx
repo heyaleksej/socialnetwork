@@ -1,34 +1,39 @@
 import React, {ChangeEvent} from 'react';
 import {addPostActionCreator, onPostChangeActionCreator} from '../../../Redux/profileReducer';
 import MyPosts from './MyPosts';
-import StoreContext from '../../../StoreContext';
+import {connect} from "react-redux";
+import {AppStateType} from "../../../Redux/redux-store";
+import {PostsType} from "../../../Redux/store";
+import {Dispatch} from "redux";
 
-type MyPostsContainerPropsType = {
-    // posts: Array<PostsType>
-    // message: string
-    // dispatch: (action: ActionsTypes) => void
+type MapStatePropsType = {
+    posts: Array<PostsType>
+    message:string
+
+}
+
+type mapDispatchPropsType = {
+    addPost: () => void,
+    onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
 
 }
 
 
-const MyPostsContainer = (props: MyPostsContainerPropsType) => {
-
-    return (
-        <StoreContext.Consumer>
-            {(store) => {
-                function addPost() {
-                    store.dispatch(addPostActionCreator(store.getState().profilePage.newPostText))
-                }
-
-                const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                    store.dispatch(onPostChangeActionCreator(e.currentTarget.value))
-                }
-            return <MyPosts addPost={addPost} onPostChange={onPostChange} posts={store.getState().profilePage.posts} message={store.getState().profilePage.newPostText}/>
-            }
-            }
-        </StoreContext.Consumer>
-    )
-
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        posts: state.profilePage.posts,
+        message: state.profilePage.newPostText
+    }
 }
-export default MyPostsContainer;
+
+const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
+    return {
+        addPost: () => dispatch(addPostActionCreator()),
+        onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => dispatch(onPostChangeActionCreator(e.currentTarget.value))
+    }
+}
+
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
+
+
 
