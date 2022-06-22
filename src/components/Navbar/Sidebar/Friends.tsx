@@ -11,7 +11,7 @@ type FriendsPropsType={
 
 
 function Friends(props:FriendsPropsType) {
-    let friendsElements = props.dialogsPage.dialogs.map(d => <span> {d.name}  <Avatar
+    let friendsElements = props.dialogsPage.dialogs.map(d => <span key={d.id}> {d.name}  <Avatar
         ava={d.ava}/>
         </span>   // маписаться по диалогам обънди
     )
