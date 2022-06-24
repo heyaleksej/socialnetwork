@@ -6,14 +6,16 @@ const UNFOLLOW = 'UNFOLLOW'
 const SETUSERS = 'SETUSERS'
 const SETPAGE = 'SETPAGE'
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
+const SET_FETCHING = 'SET_FETCHING'
 
 type followType = ReturnType<typeof followActionCreator>
 type unfollowType = ReturnType<typeof unfollowActionCreator>
 type setUsersType = ReturnType<typeof setUsersActionCreator>
 type setPageType = ReturnType<typeof setPageActionCreator>
 type setTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
+type setFetchingType = ReturnType<typeof setFetchingUsersCountAC>
 
-export type UsersActionsTypes = followType | unfollowType | setUsersType | setPageType | setTotalUsersCountType
+export type UsersActionsTypes = followType | unfollowType | setUsersType | setPageType | setTotalUsersCountType | setFetchingType
 
 export type UserTypeFromServer ={
     name: string,
@@ -42,13 +44,16 @@ export type initialStateType = {
     pageSize: number
     totalCount: number
     CurrentPage: number
+    isFetching: boolean
+
 }
 
 let initialState: initialStateType = {
     users: [],
     pageSize: 100,
     totalCount: 0,
-    CurrentPage: 2
+    CurrentPage: 2,
+    isFetching: false
 
 }
 
@@ -85,6 +90,10 @@ export const userReducer = (state: initialStateType = initialState, action: User
             return {...state, totalCount: action.totalCount}
         }
 
+        case SET_FETCHING:{
+            return {...state, isFetching: action.isFetching}
+        }
+
         default:
             return state
     }
@@ -95,4 +104,5 @@ export const unfollowActionCreator = (userID: string) => ({type: UNFOLLOW, userI
 export const setUsersActionCreator = (users: UserTypeFromServer[]) => ({type: SETUSERS, users} as const)
 export const setPageActionCreator = (CurrentPage: number) => ({type: SETPAGE, CurrentPage } as const)
 export const setTotalUsersCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS, totalCount } as const)
+export const setFetchingUsersCountAC = (isFetching: boolean) => ({type: SET_FETCHING, isFetching } as const)
 
