@@ -1,3 +1,7 @@
 .img {
     width: 90px;
 }
+
+.currentPage {
+    font-weight: bold;
+}

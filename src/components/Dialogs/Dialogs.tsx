@@ -16,12 +16,12 @@ type DialogsPropsType = {
 
 
 function Dialogs(props: DialogsPropsType) {
-    let dialogsElements = props.dialogs.map(d => <span className={s.avatarImg}><Dialog name={d.name} id={d.id}/> <Avatar
+    let dialogsElements = props.dialogs.map(d => <span key={d.id} className={s.avatarImg}><Dialog name={d.name} id={d.id}/> <Avatar
         ava={d.ava}/>
         </span>   // мапиться по диалогам обънди
     )
 
-    let messagesElements = props.messages.map(m => <Message text={m.text}/>)
+    let messagesElements = props.messages.map((m, index) => <Message key={index} text={m.text}/>)
 
     // let messagesAvatar =props.dialogsPage.dialogs.map(m=> <Avatar ava={m.ava}/>)
 
