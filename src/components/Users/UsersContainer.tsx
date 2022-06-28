@@ -33,7 +33,7 @@ export type UsersPropsType = MapStatePropsType & mapDispatchPropsType
 class UsersClass extends React.Component<UsersPropsType> {
     componentDidMount = () => {
         this.props.setFetchingUsers(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.CurrentPage}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.CurrentPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.setFetchingUsers(false)
             this.props.setUser(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
@@ -46,7 +46,7 @@ class UsersClass extends React.Component<UsersPropsType> {
 
         this.props.setPage(page)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then(response => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
             this.props.setFetchingUsers(false)
 
             this.props.setUser(response.data.items)
