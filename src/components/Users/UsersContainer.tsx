@@ -35,7 +35,6 @@ class UsersClass extends React.Component<UsersPropsType> {
         this.props.setFetchingUsers(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.CurrentPage}&count=${this.props.pageSize}`).then(response => {
             this.props.setFetchingUsers(false)
-
             this.props.setUser(response.data.items)
             this.props.setTotalUsersCount(response.data.totalCount)
         })
@@ -85,8 +84,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
-        follow: (userID: string) => {
-            dispatch(followActionCreator(userID))
+        follow: (userId: string) => {
+            dispatch(followActionCreator(userId))
         },
         unfollow: (userID: string) => dispatch(unfollowActionCreator(userID)),
         setUser: (users: UserTypeFromServer[]) => dispatch(setUsersActionCreator(users)),

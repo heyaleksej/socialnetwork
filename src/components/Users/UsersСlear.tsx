@@ -2,18 +2,19 @@ import userimg from './../../common/img/Sample_User_Icon.png'
 import s from './Users.module.css'
 import React from "react";
 import {UserTypeFromServer} from "../../Redux/userReducer";
+import {NavLink} from 'react-router-dom';
 
 type UsersClearPropsType = {
     users: Array<UserTypeFromServer>
     CurrentPage: number
     totalCount: number
     pageSize: number
-    SetPageHandler:(m:number)=> void
+    SetPageHandler: (m: number) => void
     follow: (userID: string) => void,
     unfollow: (userID: string) => void
 }
 
-export const UsersClear = (props:UsersClearPropsType) => {
+export const UsersClear = (props: UsersClearPropsType) => {
 
     let PagesCount = Math.ceil(props.totalCount / props.pageSize)
 
@@ -34,8 +35,10 @@ export const UsersClear = (props:UsersClearPropsType) => {
         {props.users.map(m => <div key={m.id}>
                     <span>
                         <div>
+                            <NavLink to={`/profile/` + m.id}>
                             <img src={m.photos.small != null ? m.photos.small : userimg} className={s.img}/>
-                        </div>
+                        </NavLink>
+                            </div>
                         <div>
                             {m.followed
                                 ? <button onClick={() => {

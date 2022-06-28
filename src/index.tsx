@@ -5,12 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./Redux/redux-store";
 import {Provider} from 'react-redux';
+import {BrowserRouter} from "react-router-dom";
 
  ReactDOM.render(
         <React.StrictMode>
+            <BrowserRouter>
             <Provider store={store}>
                 <App store={store} dispatch={store.dispatch.bind(store)}/>
             </Provider>
+            </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
@@ -20,5 +23,4 @@ import {Provider} from 'react-redux';
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
 

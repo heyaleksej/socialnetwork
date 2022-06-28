@@ -28,17 +28,6 @@ export type UserTypeFromServer ={
     followed: boolean
 }
 
-// export type UserType ={
-//     id: string
-//     name: string
-//     location :{
-//         city: string
-//         country: string
-//     }
-//     status: string
-//     followed: boolean
-// }
-
 export type initialStateType = {
     users: Array<UserTypeFromServer>
     pageSize: number

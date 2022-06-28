@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
-import Header from './components/Header/Header';
 import Nav from './components/Navbar/Nav';
-import Profile from "./components/Profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import Music from './components/Navbar/Music/Music';
 import News from "./components/Navbar/News/News";
@@ -12,6 +10,8 @@ import  {AppStateType} from "./Redux/redux-store";
 import {Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import ProfileCont from "./components/Profile/ProfileCont";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 
 
@@ -23,23 +23,15 @@ type AppPropsType = {
 function App(props: AppPropsType) {
     const state = props.store.getState()
 
-    let [name, setName] = useState('all')
-
-
-
-    const onClickHandler = (name: string) => {
-        setName(name)
-
-    }
     return (
         <>
             <BrowserRouter>
                 <div className='app-wrapper'>
-                    <Header/>
+                    <HeaderContainer />
                     <Nav dialogsPage={state.dialogsPage}/>
                     <div className='app-wrapper-content'>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                        <Route path='/profile' render={() => <Profile />}/>
+                        <Route path='/profile/:userId?' component={ProfileCont}/>
                         <Route path='/music' component={Music}/>
                         <Route path='/news' component={News}/>
                         <Route path='/settings' component={Settings}/>
