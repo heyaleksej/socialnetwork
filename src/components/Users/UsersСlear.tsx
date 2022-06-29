@@ -14,6 +14,8 @@ type UsersClearPropsType = {
     SetPageHandler: (m: number) => void
     follow: (userID: string) => void,
     unfollow: (userID: string) => void
+    setFollowingStatus: (isFollowing:boolean, userId: string) => void
+    followingInProgress: string[]
 }
 
 export const UsersClear = (props: UsersClearPropsType) => {
@@ -43,22 +45,31 @@ export const UsersClear = (props: UsersClearPropsType) => {
                             </div>
                         <div>
                             {m.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={props.followingInProgress.some(id =>id === m.id)} onClick={() => {
+                                    props.setFollowingStatus(true, m.id)
 
                                     unFollowUser(m.id).then(data => {
+
 
                                         if (data.resultCode === 0) {
                                             props.unfollow(m.id)
                                         }
+                                        props.setFollowingStatus(false, m.id)
+
 
                                     })
                                 }}>unfollow</button>
-                                : <button onClick={() => {
+                                : <button disabled={props.followingInProgress.some(id => id === m.id)} onClick={() => {
+                                    props.setFollowingStatus(true, m.id)
+
                                     followUser(m.id).then(data => {
+
 
                                         if (data.resultCode === 0) {
                                             props.follow(m.id)
                                         }
+                                        props.setFollowingStatus(false, m.id)
+
 
                                     })
                                 }}>follow</button>}

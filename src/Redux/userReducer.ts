@@ -7,6 +7,7 @@ const SETUSERS = 'SETUSERS'
 const SETPAGE = 'SETPAGE'
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
 const SET_FETCHING = 'SET_FETCHING'
+const SET_FOLLOWING_STATUS = 'SET_FOLLOWING_STATUS'
 
 type followType = ReturnType<typeof followActionCreator>
 type unfollowType = ReturnType<typeof unfollowActionCreator>
@@ -14,8 +15,9 @@ type setUsersType = ReturnType<typeof setUsersActionCreator>
 type setPageType = ReturnType<typeof setPageActionCreator>
 type setTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
 type setFetchingType = ReturnType<typeof setFetchingUsersCountAC>
+type setFollowingStatusType = ReturnType<typeof setFollowingStatus>
 
-export type UsersActionsTypes = followType | unfollowType | setUsersType | setPageType | setTotalUsersCountType | setFetchingType
+export type UsersActionsTypes = followType | unfollowType | setUsersType | setPageType | setTotalUsersCountType | setFetchingType | setFollowingStatusType
 
 export type UserTypeFromServer ={
     name: string,
@@ -34,6 +36,7 @@ export type initialStateType = {
     totalCount: number
     CurrentPage: number
     isFetching: boolean
+    followingInProgress: string[]
 
 }
 
@@ -42,7 +45,8 @@ let initialState: initialStateType = {
     pageSize: 100,
     totalCount: 0,
     CurrentPage: 2,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: []
 
 }
 
@@ -82,6 +86,12 @@ export const userReducer = (state: initialStateType = initialState, action: User
         case SET_FETCHING:{
             return {...state, isFetching: action.isFetching}
         }
+        case SET_FOLLOWING_STATUS:{
+            return  {...state,
+                followingInProgress: action.isFollowing
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)}
+        }
 
         default:
             return state
@@ -94,4 +104,5 @@ export const setUsersActionCreator = (users: UserTypeFromServer[]) => ({type: SE
 export const setPageActionCreator = (CurrentPage: number) => ({type: SETPAGE, CurrentPage } as const)
 export const setTotalUsersCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS, totalCount } as const)
 export const setFetchingUsersCountAC = (isFetching: boolean) => ({type: SET_FETCHING, isFetching } as const)
+export const setFollowingStatus = (isFollowing:any, userId: string) => ({type: SET_FOLLOWING_STATUS, isFollowing, userId } as const)
 

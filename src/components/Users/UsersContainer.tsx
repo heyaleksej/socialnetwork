@@ -4,7 +4,7 @@ import {Dispatch} from "redux";
 import {AppStateType} from '../../Redux/redux-store';
 import {
     followActionCreator,
-    initialStateType, setFetchingUsersCountAC, setPageActionCreator,
+    initialStateType, setFetchingUsersCountAC, setFollowingStatus, setPageActionCreator,
     setTotalUsersCountAC,
     setUsersActionCreator,
     unfollowActionCreator,
@@ -14,10 +14,6 @@ import UsersClear from "./UsersСlear";
 import loader from '../../common/img/Loading_icon.gif'
 import {getUsers} from "../../DAL/api";
 
-export type ItemsApiUserType ={
-    items: UserTypeFromServer[]
-    totalCount: number
-}
 
 
 type MapStatePropsType = initialStateType
@@ -30,6 +26,7 @@ type mapDispatchPropsType = {
     setPage: (CurrentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
     setFetchingUsers: (isFetching: boolean) => void
+    setFollowingStatus:(isFollowing: boolean, userId: string)=>void
 
 }
 
@@ -67,6 +64,8 @@ class UsersClass extends React.Component<UsersPropsType> {
                         SetPageHandler={this.SetPageHandler}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
+                        setFollowingStatus ={this.props.setFollowingStatus}
+                        followingInProgress ={this.props.followingInProgress}
             />
         </>
 
@@ -81,20 +80,20 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.usersPage.pageSize,
         totalCount: state.usersPage.totalCount,
         CurrentPage: state.usersPage.CurrentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
-        follow: (userId: string) => {
-            dispatch(followActionCreator(userId))
-        },
+        follow: (userId: string) => {dispatch(followActionCreator(userId))},
         unfollow: (userID: string) => dispatch(unfollowActionCreator(userID)),
         setUser: (users: UserTypeFromServer[]) => dispatch(setUsersActionCreator(users)),
         setPage: (CurrentPage: number) => dispatch(setPageActionCreator(CurrentPage)),
         setTotalUsersCount: (totalCount: number) => dispatch(setTotalUsersCountAC(totalCount)),
-        setFetchingUsers: (isFetching: boolean) => dispatch(setFetchingUsersCountAC(isFetching))
+        setFetchingUsers: (isFetching: boolean) => dispatch(setFetchingUsersCountAC(isFetching)),
+        setFollowingStatus: (isFollowing:boolean, UserId: string)=> dispatch(setFollowingStatus(isFollowing, UserId))
     }
 }
 
