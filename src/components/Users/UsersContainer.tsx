@@ -10,9 +10,14 @@ import {
     unfollowActionCreator,
     UserTypeFromServer
 } from "../../Redux/userReducer";
-import axios from "axios";
 import UsersClear from "./UsersСlear";
 import loader from '../../common/img/Loading_icon.gif'
+import {getUsers} from "../../DAL/api";
+
+export type ItemsApiUserType ={
+    items: UserTypeFromServer[]
+    totalCount: number
+}
 
 
 type MapStatePropsType = initialStateType
@@ -33,23 +38,21 @@ export type UsersPropsType = MapStatePropsType & mapDispatchPropsType
 class UsersClass extends React.Component<UsersPropsType> {
     componentDidMount = () => {
         this.props.setFetchingUsers(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.CurrentPage}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
+        getUsers(this.props.CurrentPage, this.props.pageSize).then(data => {
             this.props.setFetchingUsers(false)
-            this.props.setUser(response.data.items)
-            this.props.setTotalUsersCount(response.data.totalCount)
+            this.props.setUser(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
         })
     }
 
     SetPageHandler = (page: number) => {
         this.props.setFetchingUsers(true)
-
-
         this.props.setPage(page)
 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true}).then(response => {
+        getUsers(page, this.props.pageSize).then(data => {
+            debugger
             this.props.setFetchingUsers(false)
-
-            this.props.setUser(response.data.items)
+            this.props.setUser(data.items)
         })
     }
 
