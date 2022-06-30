@@ -3,8 +3,6 @@ import s from './Users.module.css'
 import React from "react";
 import {UserTypeFromServer} from "../../Redux/userReducer";
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
-import {followUser, unFollowUser} from "../../DAL/api";
 
 type UsersClearPropsType = {
     users: Array<UserTypeFromServer>
@@ -14,7 +12,6 @@ type UsersClearPropsType = {
     SetPageHandler: (m: number) => void
     follow: (userID: string) => void,
     unfollow: (userID: string) => void
-    setFollowingStatus: (isFollowing:boolean, userId: string) => void
     followingInProgress: string[]
 }
 
@@ -46,33 +43,10 @@ export const UsersClear = (props: UsersClearPropsType) => {
                         <div>
                             {m.followed
                                 ? <button disabled={props.followingInProgress.some(id =>id === m.id)} onClick={() => {
-                                    props.setFollowingStatus(true, m.id)
-
-                                    unFollowUser(m.id).then(data => {
-
-
-                                        if (data.resultCode === 0) {
-                                            props.unfollow(m.id)
-                                        }
-                                        props.setFollowingStatus(false, m.id)
-
-
-                                    })
+                                    props.unfollow(m.id)
                                 }}>unfollow</button>
                                 : <button disabled={props.followingInProgress.some(id => id === m.id)} onClick={() => {
-                                    props.setFollowingStatus(true, m.id)
-
-                                    followUser(m.id).then(data => {
-
-
-                                        if (data.resultCode === 0) {
-                                            props.follow(m.id)
-                                        }
-                                        props.setFollowingStatus(false, m.id)
-
-
-                                    })
-                                }}>follow</button>}
+                                    props.follow(m.id)}}>follow</button>}
                         </div>
                     </span>
                 <span>{m.name}</span>

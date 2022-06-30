@@ -2,17 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {AppStateType} from '../../Redux/redux-store';
-import {
-    followActionCreator,
-    initialStateType, setFetchingUsersCountAC, setFollowingStatus, setPageActionCreator,
-    setTotalUsersCountAC,
-    setUsersActionCreator,
-    unfollowActionCreator,
-    UserTypeFromServer
-} from "../../Redux/userReducer";
+import {followTC, getUsersTC,
+    initialStateType, setPageAC, unFollowTC, UsersActionsTypes} from "../../Redux/userReducer";
 import UsersClear from "./UsersСlear";
 import loader from '../../common/img/Loading_icon.gif'
-import {getUsers} from "../../DAL/api";
 
 
 
@@ -22,11 +15,9 @@ type MapStatePropsType = initialStateType
 type mapDispatchPropsType = {
     follow: (userID: string) => void,
     unfollow: (userID: string) => void
-    setUser: (users: UserTypeFromServer[]) => void
     setPage: (CurrentPage: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    setFetchingUsers: (isFetching: boolean) => void
-    setFollowingStatus:(isFollowing: boolean, userId: string)=>void
+    getUsers:(CurrentPage: number, pageSize: number)=> void
+
 
 }
 
@@ -34,23 +25,12 @@ export type UsersPropsType = MapStatePropsType & mapDispatchPropsType
 
 class UsersClass extends React.Component<UsersPropsType> {
     componentDidMount = () => {
-        this.props.setFetchingUsers(true)
-        getUsers(this.props.CurrentPage, this.props.pageSize).then(data => {
-            this.props.setFetchingUsers(false)
-            this.props.setUser(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-        })
+      this.props.getUsers(this.props.CurrentPage, this.props.pageSize)
     }
 
     SetPageHandler = (page: number) => {
-        this.props.setFetchingUsers(true)
-        this.props.setPage(page)
+        this.props.getUsers(page, this.props.pageSize)
 
-        getUsers(page, this.props.pageSize).then(data => {
-            debugger
-            this.props.setFetchingUsers(false)
-            this.props.setUser(data.items)
-        })
     }
 
 
@@ -64,7 +44,6 @@ class UsersClass extends React.Component<UsersPropsType> {
                         SetPageHandler={this.SetPageHandler}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
-                        setFollowingStatus ={this.props.setFollowingStatus}
                         followingInProgress ={this.props.followingInProgress}
             />
         </>
@@ -85,19 +64,27 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
+const mapDispatchToProps = (dispatch: Dispatch<UsersActionsTypes>): mapDispatchPropsType => {
     return {
-        follow: (userId: string) => {dispatch(followActionCreator(userId))},
-        unfollow: (userID: string) => dispatch(unfollowActionCreator(userID)),
-        setUser: (users: UserTypeFromServer[]) => dispatch(setUsersActionCreator(users)),
-        setPage: (CurrentPage: number) => dispatch(setPageActionCreator(CurrentPage)),
-        setTotalUsersCount: (totalCount: number) => dispatch(setTotalUsersCountAC(totalCount)),
-        setFetchingUsers: (isFetching: boolean) => dispatch(setFetchingUsersCountAC(isFetching)),
-        setFollowingStatus: (isFollowing:boolean, UserId: string)=> dispatch(setFollowingStatus(isFollowing, UserId))
+        follow: (userId: string) => dispatch(followTC(userId)),
+        unfollow: (userID: string) => dispatch(unFollowTC(userID)),
+        setPage: (CurrentPage: number) => dispatch(setPageAC(CurrentPage)),
+        getUsers: (CurrentPage: number, pageSize: number) => dispatch(getUsersTC(CurrentPage, pageSize)),
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersClass)
+export const UsersContainer = connect(mapStateToProps,
+    mapDispatchToProps)(UsersClass)
+
+// { follow: followAC,
+//     unfollow: unfollowAC,
+//     setUser: setUsersAC,
+//     setPage: setPageAC,
+//     setTotalUsersCount:
+//     setTotalUsersCountAC,
+//         setFetchingUsers: setFetchingUsersCountAC,
+//     setFollowingStatus,
+//     getUsersTC}
 
 
 

@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {followUser, getUsers, unFollowUser} from "../DAL/api";
+import {Dispatch} from "redux";
 
 
 const FOLLOW = 'FOLLOW'
@@ -9,17 +11,24 @@ const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
 const SET_FETCHING = 'SET_FETCHING'
 const SET_FOLLOWING_STATUS = 'SET_FOLLOWING_STATUS'
 
-type followType = ReturnType<typeof followActionCreator>
-type unfollowType = ReturnType<typeof unfollowActionCreator>
-type setUsersType = ReturnType<typeof setUsersActionCreator>
-type setPageType = ReturnType<typeof setPageActionCreator>
+type followType = ReturnType<typeof followAC>
+type unfollowType = ReturnType<typeof unfollowAC>
+type setUsersType = ReturnType<typeof setUsersAC>
+type setPageType = ReturnType<typeof setPageAC>
 type setTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
 type setFetchingType = ReturnType<typeof setFetchingUsersCountAC>
 type setFollowingStatusType = ReturnType<typeof setFollowingStatus>
 
-export type UsersActionsTypes = followType | unfollowType | setUsersType | setPageType | setTotalUsersCountType | setFetchingType | setFollowingStatusType
+export type UsersActionsTypes =
+    followType
+    | unfollowType
+    | setUsersType
+    | setPageType
+    | setTotalUsersCountType
+    | setFetchingType
+    | setFollowingStatusType
 
-export type UserTypeFromServer ={
+export type UserTypeFromServer = {
     name: string,
     id: string,
     photos: {
@@ -40,6 +49,7 @@ export type initialStateType = {
 
 }
 
+
 let initialState: initialStateType = {
     users: [],
     pageSize: 100,
@@ -54,17 +64,19 @@ let initialState: initialStateType = {
 export const userReducer = (state: initialStateType = initialState, action: UsersActionsTypes): initialStateType => {
     switch (action.type) {
         case FOLLOW :
-            return {...state, users: state.users.map( (m, index) => {
-                if (m.id === action.userID) {
-                    return {...m , followed: true}
-                }
-            return m
-            })
+            return {
+                ...state, users: state.users.map((m, index) => {
+                    if (m.id === action.userID) {
+                        return {...m, followed: true}
+                    }
+                    return m
+                })
             }
         case UNFOLLOW: {
-             return {...state, users: state.users.map( (m, index) => {
+            return {
+                ...state, users: state.users.map((m, index) => {
                     if (m.id === action.userID) {
-                        return {...m , followed: false}
+                        return {...m, followed: false}
                     }
                     return m
                 })
@@ -76,21 +88,23 @@ export const userReducer = (state: initialStateType = initialState, action: User
             return {...state, users: [...action.users]}
         }
 
-        case SETPAGE:{
+        case SETPAGE: {
             return {...state, CurrentPage: action.CurrentPage}
         }
-        case SET_TOTAL_USERS:{
+        case SET_TOTAL_USERS: {
             return {...state, totalCount: action.totalCount}
         }
 
-        case SET_FETCHING:{
+        case SET_FETCHING: {
             return {...state, isFetching: action.isFetching}
         }
-        case SET_FOLLOWING_STATUS:{
-            return  {...state,
+        case SET_FOLLOWING_STATUS: {
+            return {
+                ...state,
                 followingInProgress: action.isFollowing
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)}
+                    : state.followingInProgress.filter(id => id != action.userId)
+            }
         }
 
         default:
@@ -98,11 +112,65 @@ export const userReducer = (state: initialStateType = initialState, action: User
     }
 }
 
-export const followActionCreator = (userID:string) => ({type: FOLLOW , userID} as const)
-export const unfollowActionCreator = (userID: string) => ({type: UNFOLLOW, userID} as const)
-export const setUsersActionCreator = (users: UserTypeFromServer[]) => ({type: SETUSERS, users} as const)
-export const setPageActionCreator = (CurrentPage: number) => ({type: SETPAGE, CurrentPage } as const)
-export const setTotalUsersCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS, totalCount } as const)
-export const setFetchingUsersCountAC = (isFetching: boolean) => ({type: SET_FETCHING, isFetching } as const)
-export const setFollowingStatus = (isFollowing:any, userId: string) => ({type: SET_FOLLOWING_STATUS, isFollowing, userId } as const)
+export const followAC = (userID: string) => ({type: FOLLOW, userID} as const)
+export const unfollowAC = (userID: string) => ({type: UNFOLLOW, userID} as const)
+export const setUsersAC = (users: UserTypeFromServer[]) => ({type: SETUSERS, users} as const)
+export const setPageAC = (CurrentPage: number) => ({type: SETPAGE, CurrentPage} as const)
+export const setTotalUsersCountAC = (totalCount: number) => ({type: SET_TOTAL_USERS, totalCount} as const)
+export const setFetchingUsersCountAC = (isFetching: boolean) => ({type: SET_FETCHING, isFetching} as const)
+export const setFollowingStatus = (isFollowing: any, userId: string) => ({
+    type: SET_FOLLOWING_STATUS,
+    isFollowing,
+    userId
+} as const)
+
+
+export const getUsersTC = (CurrentPage: number, pageSize: number): any => {
+    return (
+        (dispatch: Dispatch<UsersActionsTypes>) => {
+            dispatch(setFetchingUsersCountAC(true))
+            getUsers(CurrentPage, pageSize).then(data => {
+                dispatch(setFetchingUsersCountAC(false))
+                dispatch(setUsersAC(data.items))
+                dispatch(setTotalUsersCountAC(data.totalCount))
+            })
+        })
+}
+
+
+export const followTC = (UserId: string): any => {
+    return (
+        (dispatch: Dispatch<UsersActionsTypes>) => {
+            dispatch(setFollowingStatus(true, UserId))
+            followUser(UserId).then(data => {
+
+                if (data.resultCode === 0) {
+                    dispatch(followAC(UserId))
+                }
+                dispatch(setFollowingStatus(false, UserId))
+
+            })
+
+
+        })
+}
+
+export const unFollowTC = (UserId: string): any => {
+    return (
+        (dispatch: Dispatch<UsersActionsTypes>) => {
+            dispatch(setFollowingStatus(true, UserId))
+            unFollowUser(UserId).then(data => {
+
+                if (data.resultCode === 0) {
+                    dispatch(unfollowAC(UserId))
+                }
+                dispatch(setFollowingStatus(false, UserId))
+
+            })
+
+
+        })
+}
+
+
 
