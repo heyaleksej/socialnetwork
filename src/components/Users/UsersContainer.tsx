@@ -1,22 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {AppStateType} from '../../Redux/redux-store';
-import {followTC, getUsersTC,
-    initialStateType, setPageAC, unFollowTC, UsersActionsTypes} from "../../Redux/userReducer";
+import {followTC, getUsersTC, initialStateType, setPageAC, unFollowTC, UsersActionsTypes} from "../../Redux/userReducer";
 import UsersClear from "./UsersСlear";
 import loader from '../../common/img/Loading_icon.gif'
+import {RedirectIfNotAuth} from "../../HOCs/RedirectIfNotAuth";
 
 
-
-type MapStatePropsType = initialStateType
+type MapStatePropsType = initialStateType & { auth: boolean }
 
 
 type mapDispatchPropsType = {
     follow: (userID: string) => void,
     unfollow: (userID: string) => void
     setPage: (CurrentPage: number) => void
-    getUsers:(CurrentPage: number, pageSize: number)=> void
+    getUsers: (CurrentPage: number, pageSize: number) => void
 
 
 }
@@ -25,7 +24,7 @@ export type UsersPropsType = MapStatePropsType & mapDispatchPropsType
 
 class UsersClass extends React.Component<UsersPropsType> {
     componentDidMount = () => {
-      this.props.getUsers(this.props.CurrentPage, this.props.pageSize)
+        this.props.getUsers(this.props.CurrentPage, this.props.pageSize)
     }
 
     SetPageHandler = (page: number) => {
@@ -44,7 +43,7 @@ class UsersClass extends React.Component<UsersPropsType> {
                         SetPageHandler={this.SetPageHandler}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
-                        followingInProgress ={this.props.followingInProgress}
+                        followingInProgress={this.props.followingInProgress}
             />
         </>
 
@@ -60,7 +59,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         totalCount: state.usersPage.totalCount,
         CurrentPage: state.usersPage.CurrentPage,
         isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        followingInProgress: state.usersPage.followingInProgress,
+        auth: state.auth.isAuth
     }
 }
 
@@ -73,8 +73,11 @@ const mapDispatchToProps = (dispatch: Dispatch<UsersActionsTypes>): mapDispatchP
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,
-    mapDispatchToProps)(UsersClass)
+export const UsersContainer = compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    RedirectIfNotAuth)
+(UsersClass)
+
 
 // { follow: followAC,
 //     unfollow: unfollowAC,

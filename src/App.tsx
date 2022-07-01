@@ -10,8 +10,9 @@ import  {AppStateType} from "./Redux/redux-store";
 import {Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
-import ProfileCont from "./components/Profile/ProfileCont";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import { Login } from './components/Login/Login';
 
 
 
@@ -31,11 +32,12 @@ function App(props: AppPropsType) {
                     <Nav dialogsPage={state.dialogsPage}/>
                     <div className='app-wrapper-content'>
                         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                        <Route path='/profile/:userId?' component={ProfileCont}/>
+                        <Route path='/profile/:userId?' component={ProfileContainer}/>
                         <Route path='/music' component={Music}/>
                         <Route path='/news' component={News}/>
                         <Route path='/settings' component={Settings}/>
                         <Route path='/users' component={UsersContainer}/>
+                        <Route path='/login' component={Login}/>
 
                     </div>
                 </div>

@@ -1,5 +1,4 @@
-import {v1} from "uuid";
-import {followUser, getUsers, unFollowUser} from "../DAL/api";
+import {UsersApi} from "../DAL/api";
 import {Dispatch} from "redux";
 
 
@@ -106,7 +105,6 @@ export const userReducer = (state: initialStateType = initialState, action: User
                     : state.followingInProgress.filter(id => id != action.userId)
             }
         }
-
         default:
             return state
     }
@@ -129,7 +127,7 @@ export const getUsersTC = (CurrentPage: number, pageSize: number): any => {
     return (
         (dispatch: Dispatch<UsersActionsTypes>) => {
             dispatch(setFetchingUsersCountAC(true))
-            getUsers(CurrentPage, pageSize).then(data => {
+            UsersApi.getUsers(CurrentPage, pageSize).then(data => {
                 dispatch(setFetchingUsersCountAC(false))
                 dispatch(setUsersAC(data.items))
                 dispatch(setTotalUsersCountAC(data.totalCount))
@@ -142,7 +140,7 @@ export const followTC = (UserId: string): any => {
     return (
         (dispatch: Dispatch<UsersActionsTypes>) => {
             dispatch(setFollowingStatus(true, UserId))
-            followUser(UserId).then(data => {
+            UsersApi.followUser(UserId).then(data => {
 
                 if (data.resultCode === 0) {
                     dispatch(followAC(UserId))
@@ -150,8 +148,6 @@ export const followTC = (UserId: string): any => {
                 dispatch(setFollowingStatus(false, UserId))
 
             })
-
-
         })
 }
 
@@ -159,16 +155,11 @@ export const unFollowTC = (UserId: string): any => {
     return (
         (dispatch: Dispatch<UsersActionsTypes>) => {
             dispatch(setFollowingStatus(true, UserId))
-            unFollowUser(UserId).then(data => {
+            UsersApi.unFollowUser(UserId).then(data => {
 
-                if (data.resultCode === 0) {
-                    dispatch(unfollowAC(UserId))
-                }
+                if (data.resultCode === 0) {dispatch(unfollowAC(UserId))}
                 dispatch(setFollowingStatus(false, UserId))
-
             })
-
-
         })
 }
 

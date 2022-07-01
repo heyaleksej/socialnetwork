@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
-import {getHeader, getUsers} from "../DAL/api";
-import {setFetchingUsersCountAC, setTotalUsersCountAC, setUsersAC, UsersActionsTypes} from "./userReducer";
+import {AuthApi} from "../DAL/api";
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 
@@ -45,7 +44,7 @@ export const setAuthUser = (userId: number, email: string, login: string) => ({t
 export const setAuthUserTC = (): any => {
     return (
         (dispatch: Dispatch<setAuthUserType>) => {
-        getHeader().then(data => {
+        AuthApi.isAuthorized().then(data => {
             if (data.resultCode === 0) {
                 let {id, email, login} = data.data
                 dispatch(setAuthUser(id, email, login))

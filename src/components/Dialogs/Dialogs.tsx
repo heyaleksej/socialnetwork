@@ -5,6 +5,7 @@ import Message from './Message/Message';
 import {DialogsType, MessageType} from "../../Redux/store";
 import Avatar from '../MiniAvatars/Avatar';
 import {CustomInput} from "../CustomInput/CustomInput";
+import {Redirect} from "react-router-dom";
 
 type DialogsPropsType = {
     dialogs: Array<DialogsType>
@@ -12,6 +13,7 @@ type DialogsPropsType = {
     messages: Array<MessageType>
     addMessage:()=>void
     onMessageChange:(event: ChangeEvent<HTMLInputElement>)=>void
+    auth: boolean
 }
 
 
@@ -45,10 +47,6 @@ function Dialogs(props: DialogsPropsType) {
 
             <div className={s.messages}>
                 {messagesElements}
-                {/*<div>*/}
-                {/*    <CustomButton onClick={addMessage}  title={'Send'}/>*/}
-                {/*</div>*/}
-
                 <CustomInput title={'send text'} value={props.text} onChange={onMessageChange}  onClick={addMessage}/>
             </div>
             <div>

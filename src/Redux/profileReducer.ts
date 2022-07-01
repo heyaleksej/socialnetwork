@@ -1,5 +1,7 @@
 import {PostsType} from "./store";
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {UsersApi} from "../DAL/api";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -88,7 +90,18 @@ export const onPostChangeActionCreator = (newPostText: string) => {
     } as const
 }
 
-export const setUserProfile = (profile: ProfileTypeFromServer) => {
+const setUserProfile = (profile: ProfileTypeFromServer) => {
     return {type: SET_USER_PROFILE, profile} as const
 
 }
+
+export const setUserProfileTC = (userId: string): any => {
+    return (
+        (dispatch: Dispatch<ProfileActionsTypes>) => {
+            UsersApi.getUserProfile(userId).then(data => {
+                dispatch(setUserProfile(data))
+            })
+          }
+    )
+}
+
