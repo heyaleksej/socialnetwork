@@ -5,20 +5,16 @@ import {sidebarReducer } from "./sidebarReducer";
 import {userReducer} from "./userReducer";
 import {authReducer} from "./authReducer";
 import thunk from "redux-thunk";
+import {reducer as formReducer} from 'redux-form'
 
-/*
-export type StoreType= typeof store
-
-type ReducersType= typeof reducers
-export type AppStateType =ReturnType<ReducersType>
-*/
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: userReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>

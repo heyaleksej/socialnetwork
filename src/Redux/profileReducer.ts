@@ -64,18 +64,18 @@ export const profileReducer = (state: initialStateType = initialState, action: P
         case ADD_POST :
             let newPost: PostsType = {
                 id: v1(),
-                message: state.newPostText,
+                message: action.newPostText,
                 like: 0
             }
             return {
-                ...state, newPostText: '', posts: [...state.posts, newPost]
+                ...state,  posts: [...state.posts, newPost]
             }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newPostText
-            }
-        }
+        // case UPDATE_NEW_POST_TEXT: {
+        //     return {
+        //         ...state,
+        //         newPostText: action.newPostText
+        //     }
+        // }
 
         case SET_USER_PROFILE : {
             return {
@@ -95,7 +95,7 @@ export const profileReducer = (state: initialStateType = initialState, action: P
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST} as const)
+export const addPostActionCreator = (newPostText: string) => ({type: ADD_POST, newPostText} as const)
 export const onPostChangeActionCreator = (newPostText: string) => {
     return {
         type: UPDATE_NEW_POST_TEXT,

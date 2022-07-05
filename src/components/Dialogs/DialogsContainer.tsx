@@ -17,7 +17,7 @@ type MapStatePropsType = {
 }
 
 type mapDispatchPropsType = {
-    addMessage: () => void,
+    addMessage: (newTextMessage:string) => void,
     onMessageChange: (event: ChangeEvent<HTMLInputElement>) => void
 
 }
@@ -34,7 +34,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
-        addMessage:() => dispatch(addMessageActionCreator()),
+        addMessage:(newTextMessage:string) => dispatch(addMessageActionCreator(newTextMessage)),
         onMessageChange:(event: ChangeEvent<HTMLInputElement>)=> dispatch(onMessageChangeActionCreator(event.currentTarget.value))
     }
 }

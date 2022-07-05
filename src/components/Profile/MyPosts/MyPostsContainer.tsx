@@ -13,8 +13,8 @@ type MapStatePropsType = {
 }
 
 type mapDispatchPropsType = {
-    addPost: () => void,
-    onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    addPost: (newPostText:string) => void,
+    // onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
 
 }
 
@@ -28,8 +28,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     return {
-        addPost: () => dispatch(addPostActionCreator()),
-        onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => dispatch(onPostChangeActionCreator(e.currentTarget.value))
+        addPost: (newPostText:string) => dispatch(addPostActionCreator(newPostText)),
+        // onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => dispatch(onPostChangeActionCreator(e.currentTarget.value))
     }
 }
 

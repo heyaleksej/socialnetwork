@@ -44,7 +44,7 @@ export const dialogsReducer = (state: initialStateType = initialState, action: A
         case ADD_MESSAGE:
             let newMessage: MessageType = {
                 id: v1(),
-                text: state.newTextMessage,
+                text: action.newTextMessage,
             }
             return {...state , newTextMessage:'', messages: [...state.messages, newMessage]};
         case UPDATE_NEW_MESSAGE_TEXT :
@@ -57,7 +57,7 @@ export const dialogsReducer = (state: initialStateType = initialState, action: A
     }
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE} as const)
+export const addMessageActionCreator = (newTextMessage: string) => ({type: ADD_MESSAGE, newTextMessage} as const)
 export const onMessageChangeActionCreator = (newTextMessage: string) => {
     return {
         type: UPDATE_NEW_MESSAGE_TEXT,
