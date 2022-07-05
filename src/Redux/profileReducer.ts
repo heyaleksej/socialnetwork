@@ -1,17 +1,21 @@
 import {PostsType} from "./store";
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {UsersApi} from "../DAL/api";
+import {ProfileApi, UsersApi} from "../DAL/api";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
+const UPDATE_STATUS = 'UPDATE_STATUS'
 
 type addPostType = ReturnType<typeof addPostActionCreator>
 type onPostChangeType = ReturnType<typeof onPostChangeActionCreator>
 type setUserProfileType = ReturnType<typeof setUserProfile>
+type setStatusType = ReturnType<typeof SetStatusAC>
+type updateStatusType = ReturnType<typeof updateStatusAC>
 
-export type ProfileActionsTypes = addPostType | onPostChangeType | setUserProfileType
+export type ProfileActionsTypes = addPostType | onPostChangeType | setUserProfileType | setStatusType | updateStatusType
 
 
 
@@ -41,6 +45,7 @@ export type initialStateType = {
     posts: Array<PostsType>
     newPostText: string
     profile: ProfileTypeFromServer | null
+    status: string
 }
 
 let initialState = {
@@ -49,7 +54,8 @@ let initialState = {
         {id: v1(), message: 'postav like pliz', like: 5}
     ],
     newPostText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 
@@ -76,6 +82,13 @@ export const profileReducer = (state: initialStateType = initialState, action: P
                 ...state, profile: action.profile
             }
         }
+        case SET_STATUS:{
+            return {
+                ...state, status: action.status
+
+            }
+        }
+
 
         default:
             return state
@@ -89,11 +102,12 @@ export const onPostChangeActionCreator = (newPostText: string) => {
         newPostText: newPostText
     } as const
 }
-
-const setUserProfile = (profile: ProfileTypeFromServer) => {
+export const setUserProfile = (profile: ProfileTypeFromServer) => {
     return {type: SET_USER_PROFILE, profile} as const
 
 }
+const SetStatusAC =(status:string)=>({type: SET_STATUS, status} as const)
+export const updateStatusAC =(status: string)=>({type: UPDATE_STATUS, status} as const)
 
 export const setUserProfileTC = (userId: string): any => {
     return (
@@ -105,3 +119,22 @@ export const setUserProfileTC = (userId: string): any => {
     )
 }
 
+export const getStatusTC = (userId: string): any =>{
+    return (dispatch: Dispatch<ProfileActionsTypes>) =>{
+        ProfileApi.getStatus(userId).then(data => { dispatch(SetStatusAC(data))
+
+        })
+
+    }
+}
+
+export const updateStatusTC = (status: string): any =>{
+    return (dispatch: Dispatch<ProfileActionsTypes>) =>{
+        ProfileApi.updateStatus(status).then(response => {
+            if (response.data.resultCode === 0)
+            dispatch(SetStatusAC(status))
+
+        })
+
+    }
+}

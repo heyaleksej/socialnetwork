@@ -1,13 +1,13 @@
 import React from 'react';
-import MyPosts from './MyPosts/MyPosts';
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsTypes, PostsType} from "../../Redux/store";
-import store from "../../Redux/redux-store";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
-import {initialStateType, ProfileTypeFromServer} from "../../Redux/profileReducer";
+import {ProfileTypeFromServer} from "../../Redux/profileReducer";
 
 type ProfilePropsType = {
     profile?: ProfileTypeFromServer | null
+    status: string
+    updateStatusTC:(status:string)=>void
+
 
 }
 
@@ -16,7 +16,7 @@ type ProfilePropsType = {
 const Profile = (props: ProfilePropsType) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status} updateStatusTC={props.updateStatusTC} />
             <MyPostsContainer />
         </div>);
 

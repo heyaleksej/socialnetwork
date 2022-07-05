@@ -6,6 +6,7 @@ import {followTC, getUsersTC, initialStateType, setPageAC, unFollowTC, UsersActi
 import UsersClear from "./UsersСlear";
 import loader from '../../common/img/Loading_icon.gif'
 import {RedirectIfNotAuth} from "../../HOCs/RedirectIfNotAuth";
+import {Preloader} from "../../common/Preloader/Preloader";
 
 
 type MapStatePropsType = initialStateType & { auth: boolean }
@@ -35,7 +36,7 @@ class UsersClass extends React.Component<UsersPropsType> {
 
     render() {
         return <>
-            {this.props.isFetching ? <img src={loader}/> : null}
+            {this.props.isFetching ? <Preloader/>: null}
             <UsersClear users={this.props.users}
                         totalCount={this.props.totalCount}
                         pageSize={this.props.pageSize}

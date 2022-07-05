@@ -15,7 +15,7 @@ export const UsersApi = {
     },
 
     getUserProfile(userId: string){
-        return instance.get(`profile/` + userId).then(response => response.data)
+        return ProfileApi.getUserProfile(userId)
 
     },
     followUser(id: string) {
@@ -33,6 +33,22 @@ export const AuthApi = {
     isAuthorized(){
         return instance.get( `auth/me`).then(response => response.data)
     },
+
+}
+
+export const ProfileApi = {
+    getUserProfile(userId: string){
+        return instance.get(`profile/` + userId).then(response => response.data)
+
+    },
+
+    getStatus(userId: string){
+        return instance.get(`/profile/status/${userId}`).then(response => response.data)
+    },
+
+    updateStatus(status: string){
+        return instance.put(`/profile/status`, {status})
+    }
 
 }
 

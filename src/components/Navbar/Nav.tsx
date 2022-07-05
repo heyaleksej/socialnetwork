@@ -5,12 +5,11 @@ import Sidebar from "./Sidebar/Sidebar";
 import {DialogsPageType, DialogsType, RootStateType} from "../../Redux/store";
 
 type NavType={
-    dialogsPage:DialogsPageType
 
 }
 
 
-const Nav =(props:NavType)=>{
+const Nav =()=>{
    return (
        <nav className={s.nav}>
            <div className={s.item}>
@@ -31,7 +30,7 @@ const Nav =(props:NavType)=>{
            <div className={s.item}>
                <NavLink to={'/users'} activeClassName={s.activeLink}>Users</NavLink>
            </div>
-           <Sidebar dialogsPage={props.dialogsPage}/>
+           {/*<Sidebar dialogsPage={props.dialogsPage}/>*/}
        </nav>
    )
 

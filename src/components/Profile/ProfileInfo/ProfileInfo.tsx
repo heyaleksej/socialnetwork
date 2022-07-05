@@ -1,15 +1,24 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
 import { ProfileTypeFromServer} from "../../../Redux/profileReducer";
+import {ProfileStatus} from "../ProfileStatus/ProfileStatus";
+import { Preloader } from "../../../common/Preloader/Preloader";
 
-type ProfileInfoPropsType = {
+export type ProfileInfoPropsType = {
     profile?: ProfileTypeFromServer | null
+    status: string
+    updateStatusTC:(status:string)=>void
+
 }
 
 
 export function ProfileInfo(props:ProfileInfoPropsType) {
+    if (!props.profile) {
+        return <Preloader/>
+    }
       return (
         <div>
+            <ProfileStatus status={props.status} updateStatusTC={props.updateStatusTC}/>
             <div>
                    <div>
                         <span>
