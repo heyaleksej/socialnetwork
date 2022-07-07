@@ -1,57 +1,71 @@
 import React from 'react';
 import './App.css';
 import Nav from './components/Navbar/Nav';
-import {BrowserRouter, Redirect, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
 import Music from './components/Navbar/Music/Music';
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
-import {ActionsTypes} from "./Redux/store";
-import  {AppStateType} from "./Redux/redux-store";
+import {AppStateType} from "./Redux/redux-store";
 import {compose, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import { Login } from './components/Login/Login';
-import {RedirectIfNotAuth} from "./HOCs/RedirectIfNotAuth";
-import {connect} from "react-redux";
-
+import Login from './components/Login/Login';
+import {connect, Provider} from "react-redux";
+import {InitializeApp} from "./Redux/appReducer";
+import {Preloader} from "./common/Preloader/Preloader";
 
 
 // type AppPropsType = {
 //     store: Store<AppStateType>;
 //     dispatch: (action: ActionsTypes) => void
 // }
+//
+type MapStateToPropsType = {
+    initialized: boolean
+}
 
-class App extends React.Component {
+const MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    initialized: state.app.initialized
+})
+
+
+class App extends React.Component<any, any> {
 
     componentDidMount() {
+        this.props.InitializeApp()
     }
 
     render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
 
         return (
-            <>
-                <BrowserRouter>
-                    <div className='app-wrapper'>
-                        <HeaderContainer/>
-                        <Nav/>
-                        <div className='app-wrapper-content'>
-                            {/*<Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>*/}
-                            <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                            <Route path='/profile/:userId?' component={ProfileContainer}/>
-                            <Route path='/music' component={Music}/>
-                            <Route path='/news' component={News}/>
-                            <Route path='/settings' component={Settings}/>
-                            <Route path='/users' component={UsersContainer}/>
-                            <Route path='/login' component={Login}/>
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Nav/>
+                <div className='app-wrapper-content'>
+                    {/*<Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>*/}
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/profile/:userId?' component={ProfileContainer}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/news' component={News}/>
+                    <Route path='/settings' component={Settings}/>
+                    <Route path='/users' component={UsersContainer}/>
+                    <Route path='/login' component={Login}/>
 
-                        </div>
-                    </div>
-                </BrowserRouter>
-            </>)
+                </div>
+            </div>
+        )
     }
 }
 
 
-export default App;
+export default  compose(
+    withRouter,
+    connect(MapStateToProps, {InitializeApp}))(App) as React.FunctionComponent<any>;
+
+
+

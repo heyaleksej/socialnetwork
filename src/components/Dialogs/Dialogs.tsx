@@ -5,7 +5,6 @@ import Message from './Message/Message';
 import {DialogsType, MessageType} from "../../Redux/store";
 import Avatar from '../MiniAvatars/Avatar';
 import {CustomInput} from "../CustomInput/CustomForms";
-import {Redirect} from "react-router-dom";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {MaxLength, RequiredField} from "../../Utils/Validators/Validators";
 
@@ -35,18 +34,6 @@ function Dialogs(props: DialogsPropsType) {
 
     // let messagesAvatar =props.dialogsPage.dialogs.map(m=> <Avatar ava={m.ava}/>)
 
-    const addMessage = (message: string) => {
-        console.log('add mess')
-        props.addMessage(message)
-
-    }
-
-    const onMessageChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log('mess onchange')
-
-        props.onMessageChange(event)
-    }
-
     const MaxL = MaxLength(50)
 
 
@@ -69,7 +56,6 @@ function Dialogs(props: DialogsPropsType) {
     const DialogsReduxForm = reduxForm<DialogsFormType>({form: 'newMessage'})(DialogsForm)
 
     const onSubmit = (values: any) => {
-        debugger
         props.addMessage(values.newMessage)
     }
 

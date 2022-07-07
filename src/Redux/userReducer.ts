@@ -17,6 +17,7 @@ type setPageType = ReturnType<typeof setPageAC>
 type setTotalUsersCountType = ReturnType<typeof setTotalUsersCountAC>
 type setFetchingType = ReturnType<typeof setFetchingUsersCountAC>
 type setFollowingStatusType = ReturnType<typeof setFollowingStatus>
+type fakeType = ReturnType<typeof FakeAC>
 
 export type UsersActionsTypes =
     followType
@@ -26,6 +27,7 @@ export type UsersActionsTypes =
     | setTotalUsersCountType
     | setFetchingType
     | setFollowingStatusType
+    | fakeType
 
 export type UserTypeFromServer = {
     name: string,
@@ -45,6 +47,7 @@ export type initialStateType = {
     CurrentPage: number
     isFetching: boolean
     followingInProgress: string[]
+    fake: number
 
 }
 
@@ -55,13 +58,16 @@ let initialState: initialStateType = {
     totalCount: 0,
     CurrentPage: 2,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    fake:10
 
 }
 
 
 export const userReducer = (state: initialStateType = initialState, action: UsersActionsTypes): initialStateType => {
     switch (action.type) {
+        case 'FAKE':
+            return {...state, fake: state.fake + 1}
         case FOLLOW :
             return {
                 ...state, users: state.users.map((m, index) => {
@@ -110,6 +116,8 @@ export const userReducer = (state: initialStateType = initialState, action: User
     }
 }
 
+export const FakeAC = () => ({type: 'FAKE'} as const)
+
 export const followAC = (userID: string) => ({type: FOLLOW, userID} as const)
 export const unfollowAC = (userID: string) => ({type: UNFOLLOW, userID} as const)
 export const setUsersAC = (users: UserTypeFromServer[]) => ({type: SETUSERS, users} as const)
@@ -127,6 +135,7 @@ export const getUsersTC = (CurrentPage: number, pageSize: number): any => {
     return (
         (dispatch: Dispatch<UsersActionsTypes>) => {
             dispatch(setFetchingUsersCountAC(true))
+            dispatch(setPageAC(CurrentPage))
             UsersApi.getUsers(CurrentPage, pageSize).then(data => {
                 dispatch(setFetchingUsersCountAC(false))
                 dispatch(setUsersAC(data.items))
@@ -157,7 +166,9 @@ export const unFollowTC = (UserId: string): any => {
             dispatch(setFollowingStatus(true, UserId))
             UsersApi.unFollowUser(UserId).then(data => {
 
-                if (data.resultCode === 0) {dispatch(unfollowAC(UserId))}
+                if (data.resultCode === 0) {
+                    dispatch(unfollowAC(UserId))
+                }
                 dispatch(setFollowingStatus(false, UserId))
             })
         })

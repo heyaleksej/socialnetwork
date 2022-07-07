@@ -2,14 +2,38 @@ import React from 'react';
 import {connect} from "react-redux";
 import {compose, Dispatch} from "redux";
 import {AppStateType} from '../../Redux/redux-store';
-import {followTC, getUsersTC, initialStateType, setPageAC, unFollowTC, UsersActionsTypes} from "../../Redux/userReducer";
+import {
+    followTC,
+    getUsersTC,
+    initialStateType,
+    setPageAC,
+    unFollowTC,
+    UsersActionsTypes,
+    UserTypeFromServer
+} from "../../Redux/userReducer";
 import UsersClear from "./UsersСlear";
-import loader from '../../common/img/Loading_icon.gif'
 import {RedirectIfNotAuth} from "../../HOCs/RedirectIfNotAuth";
 import {Preloader} from "../../common/Preloader/Preloader";
+import {
+    getAuth,
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalCount,
+    getUsers
+} from "./userSelector";
 
 
-type MapStatePropsType = initialStateType & { auth: boolean }
+type MapStatePropsType = {
+    users: Array<UserTypeFromServer>
+    pageSize: number
+    totalCount: number
+    CurrentPage: number
+    isFetching: boolean
+    followingInProgress: string[]
+    auth: boolean
+}
 
 
 type mapDispatchPropsType = {
@@ -35,8 +59,10 @@ class UsersClass extends React.Component<UsersPropsType> {
 
 
     render() {
+        console.log('render users! ')
+
         return <>
-            {this.props.isFetching ? <Preloader/>: null}
+            {this.props.isFetching ? <Preloader/> : null}
             <UsersClear users={this.props.users}
                         totalCount={this.props.totalCount}
                         pageSize={this.props.pageSize}
@@ -54,14 +80,17 @@ class UsersClass extends React.Component<UsersPropsType> {
 
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    console.log('mapToStateToProps users')
+
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalCount: state.usersPage.totalCount,
-        CurrentPage: state.usersPage.CurrentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress,
-        auth: state.auth.isAuth
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalCount: getTotalCount(state),
+        CurrentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state),
+        auth: getAuth(state),
+        // fake: state.usersPage.fake
     }
 }
 
@@ -75,8 +104,7 @@ const mapDispatchToProps = (dispatch: Dispatch<UsersActionsTypes>): mapDispatchP
 }
 
 export const UsersContainer = compose<React.ComponentType>(
-    connect(mapStateToProps, mapDispatchToProps),
-    RedirectIfNotAuth)
+    connect(mapStateToProps, mapDispatchToProps))
 (UsersClass)
 
 

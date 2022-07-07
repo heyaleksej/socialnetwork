@@ -46,6 +46,9 @@ export type initialStateType = {
     newPostText: string
     profile: ProfileTypeFromServer | null
     status: string
+    isAuth: boolean
+    authId: string | undefined
+
 }
 
 let initialState = {
@@ -55,7 +58,9 @@ let initialState = {
     ],
     newPostText: '',
     profile: null,
-    status: ''
+    status: '',
+    isAuth: false,
+    authId: undefined
 }
 
 
@@ -109,10 +114,10 @@ export const setUserProfile = (profile: ProfileTypeFromServer) => {
 const SetStatusAC =(status:string)=>({type: SET_STATUS, status} as const)
 export const updateStatusAC =(status: string)=>({type: UPDATE_STATUS, status} as const)
 
-export const setUserProfileTC = (userId: string): any => {
+export const getUserProfileTC = (userId: string): any => {
     return (
         (dispatch: Dispatch<ProfileActionsTypes>) => {
-            UsersApi.getUserProfile(userId).then(data => {
+            return UsersApi.getUserProfile(userId).then(data => {
                 dispatch(setUserProfile(data))
             })
           }
@@ -121,7 +126,7 @@ export const setUserProfileTC = (userId: string): any => {
 
 export const getStatusTC = (userId: string): any =>{
     return (dispatch: Dispatch<ProfileActionsTypes>) =>{
-        ProfileApi.getStatus(userId).then(data => { dispatch(SetStatusAC(data))
+        return ProfileApi.getStatus(userId).then(data => { dispatch(SetStatusAC(data))
 
         })
 
