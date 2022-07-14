@@ -5,14 +5,12 @@ import {AppStateType} from '../../Redux/redux-store';
 import {
     followTC,
     getUsersTC,
-    initialStateType,
     setPageAC,
     unFollowTC,
     UsersActionsTypes,
     UserTypeFromServer
 } from "../../Redux/userReducer";
 import UsersClear from "./UsersСlear";
-import {RedirectIfNotAuth} from "../../HOCs/RedirectIfNotAuth";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {
     getAuth,
@@ -49,7 +47,8 @@ export type UsersPropsType = MapStatePropsType & mapDispatchPropsType
 
 class UsersClass extends React.Component<UsersPropsType> {
     componentDidMount = () => {
-        this.props.getUsers(this.props.CurrentPage, this.props.pageSize)
+        const {CurrentPage,pageSize} = this.props
+        this.props.getUsers(CurrentPage, pageSize)
     }
 
     SetPageHandler = (page: number) => {

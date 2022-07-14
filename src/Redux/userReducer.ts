@@ -56,7 +56,7 @@ let initialState: initialStateType = {
     users: [],
     pageSize: 100,
     totalCount: 0,
-    CurrentPage: 2,
+    CurrentPage: 1,
     isFetching: false,
     followingInProgress: [],
     fake:10

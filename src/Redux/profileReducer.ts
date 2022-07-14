@@ -8,14 +8,22 @@ const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const UPDATE_STATUS = 'UPDATE_STATUS'
+const DELETE_POST = 'DELETE_POST'
 
 type addPostType = ReturnType<typeof addPostActionCreator>
 type onPostChangeType = ReturnType<typeof onPostChangeActionCreator>
 type setUserProfileType = ReturnType<typeof setUserProfile>
 type setStatusType = ReturnType<typeof SetStatusAC>
 type updateStatusType = ReturnType<typeof updateStatusAC>
+type deletePostType = ReturnType<typeof deletePost>
 
-export type ProfileActionsTypes = addPostType | onPostChangeType | setUserProfileType | setStatusType | updateStatusType
+export type ProfileActionsTypes =
+    addPostType |
+    onPostChangeType |
+    setUserProfileType |
+    setStatusType |
+    updateStatusType |
+    deletePostType
 
 
 
@@ -75,13 +83,6 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             return {
                 ...state,  posts: [...state.posts, newPost]
             }
-        // case UPDATE_NEW_POST_TEXT: {
-        //     return {
-        //         ...state,
-        //         newPostText: action.newPostText
-        //     }
-        // }
-
         case SET_USER_PROFILE : {
             return {
                 ...state, profile: action.profile
@@ -93,8 +94,11 @@ export const profileReducer = (state: initialStateType = initialState, action: P
 
             }
         }
-
-
+        case DELETE_POST:{
+            return {
+                ...state, posts: state.posts.filter(f => f.id != action.postID)
+            }
+        }
         default:
             return state
     }
@@ -111,8 +115,9 @@ export const setUserProfile = (profile: ProfileTypeFromServer) => {
     return {type: SET_USER_PROFILE, profile} as const
 
 }
-const SetStatusAC =(status:string)=>({type: SET_STATUS, status} as const)
+export const SetStatusAC =(status:string)=>({type: SET_STATUS, status} as const)
 export const updateStatusAC =(status: string)=>({type: UPDATE_STATUS, status} as const)
+export const deletePost = (postID:string)=>({type:DELETE_POST, postID} as const)
 
 export const getUserProfileTC = (userId: string): any => {
     return (
@@ -123,6 +128,14 @@ export const getUserProfileTC = (userId: string): any => {
           }
     )
 }
+
+// refactoring
+//
+// export const getUserProfileTC = (userId: string): any => async (dispatch: Dispatch<ProfileActionsTypes>) => {
+//             const response:any = UsersApi.getUserProfile(userId)
+//             dispatch(setUserProfile(response.data))
+//
+// }
 
 export const getStatusTC = (userId: string): any =>{
     return (dispatch: Dispatch<ProfileActionsTypes>) =>{
