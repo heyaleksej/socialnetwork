@@ -5,20 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from "./Redux/redux-store";
 import {Provider} from 'react-redux';
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 
-
-// setInterval(()=>{
-//     // store.dispatch({type: "FAKE"})
-// },1000)
 
  ReactDOM.render(
         <React.StrictMode>
-            <BrowserRouter>
+            <HashRouter>
             <Provider store={store}>
                 <App/>
             </Provider>
-            </BrowserRouter>
+            </HashRouter>
         </React.StrictMode>,
         document.getElementById('root')
     );
