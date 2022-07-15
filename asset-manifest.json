@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/socialnetwork/static/css/main.86261a17.chunk.css",
+    "main.js": "/socialnetwork/static/js/main.26196bba.chunk.js",
+    "main.js.map": "/socialnetwork/static/js/main.26196bba.chunk.js.map",
+    "runtime-main.js": "/socialnetwork/static/js/runtime-main.2fc3f857.js",
+    "runtime-main.js.map": "/socialnetwork/static/js/runtime-main.2fc3f857.js.map",
+    "static/js/2.51c34454.chunk.js": "/socialnetwork/static/js/2.51c34454.chunk.js",
+    "static/js/2.51c34454.chunk.js.map": "/socialnetwork/static/js/2.51c34454.chunk.js.map",
+    "static/css/3.4d4f8fc9.chunk.css": "/socialnetwork/static/css/3.4d4f8fc9.chunk.css",
+    "static/js/3.a9f305c1.chunk.js": "/socialnetwork/static/js/3.a9f305c1.chunk.js",
+    "static/js/3.a9f305c1.chunk.js.map": "/socialnetwork/static/js/3.a9f305c1.chunk.js.map",
+    "static/css/4.44cecb35.chunk.css": "/socialnetwork/static/css/4.44cecb35.chunk.css",
+    "static/js/4.e88f0b19.chunk.js": "/socialnetwork/static/js/4.e88f0b19.chunk.js",
+    "static/js/4.e88f0b19.chunk.js.map": "/socialnetwork/static/js/4.e88f0b19.chunk.js.map",
+    "static/js/5.a1d31984.chunk.js": "/socialnetwork/static/js/5.a1d31984.chunk.js",
+    "static/js/5.a1d31984.chunk.js.map": "/socialnetwork/static/js/5.a1d31984.chunk.js.map",
+    "index.html": "/socialnetwork/index.html",
+    "static/css/3.4d4f8fc9.chunk.css.map": "/socialnetwork/static/css/3.4d4f8fc9.chunk.css.map",
+    "static/css/4.44cecb35.chunk.css.map": "/socialnetwork/static/css/4.44cecb35.chunk.css.map",
+    "static/css/main.86261a17.chunk.css.map": "/socialnetwork/static/css/main.86261a17.chunk.css.map",
+    "static/js/2.51c34454.chunk.js.LICENSE.txt": "/socialnetwork/static/js/2.51c34454.chunk.js.LICENSE.txt",
+    "static/media/Loading_icon.1a32f552.gif": "/socialnetwork/static/media/Loading_icon.1a32f552.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2fc3f857.js",
+    "static/js/2.51c34454.chunk.js",
+    "static/css/main.86261a17.chunk.css",
+    "static/js/main.26196bba.chunk.js"
+  ]
+}
