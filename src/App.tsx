@@ -1,20 +1,24 @@
-import React from 'react';
+import React, {ReactChildren, Suspense} from 'react';
 import './App.css';
 import Nav from './components/Navbar/Nav';
-import {BrowserRouter, HashRouter, Route, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import Music from './components/Navbar/Music/Music';
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
 import {AppStateType} from "./Redux/redux-store";
-import {compose, Store} from "redux";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {compose} from "redux";
+// import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
+// import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from './components/Login/Login';
-import {connect, Provider} from "react-redux";
+import {connect} from "react-redux";
 import {InitializeApp} from "./Redux/appReducer";
 import {Preloader} from "./common/Preloader/Preloader";
+import {withSuspense} from "./HOCs/WithSuspense";
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 
 
 // type AppPropsType = {
@@ -47,8 +51,7 @@ class App extends React.Component<any, any> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    {/*<Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>*/}
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/dialogs' render={() => withSuspense(DialogsContainer)}/>
                     <Route path='/profile/:userId?' component={ProfileContainer}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/news' component={News}/>
@@ -63,9 +66,9 @@ class App extends React.Component<any, any> {
 }
 
 
-export default  compose(
+export default compose<React.ComponentType>(
     withRouter,
-    connect(MapStateToProps, {InitializeApp}))(App) as React.FunctionComponent<any>;
+    connect(MapStateToProps, {InitializeApp}))(App);
 
 
 

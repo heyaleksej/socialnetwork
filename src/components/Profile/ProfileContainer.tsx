@@ -64,7 +64,7 @@ let mapToStateToProps = (state: AppStateType): MapStatePropsType => {
 // let URLDataContComp = withRouter(ProfileCont)
 // let URLDataContCompAuth = RedirectIfNotAuth(URLDataContComp)
 
-export const ProfileContainer = compose<React.ComponentType>(RedirectIfNotAuth,
+export default compose<React.ComponentType>(RedirectIfNotAuth,
     connect(mapToStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC}),
     withRouter)
 (ProfileClass);

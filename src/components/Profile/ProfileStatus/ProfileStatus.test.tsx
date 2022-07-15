@@ -1,6 +1,6 @@
 import React from "react";
 import { create } from "react-test-renderer";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatus  from "./ProfileStatus";
 
 describe("ProfileStatus component", () => {
     test("status from props should be in the state", () => {
@@ -46,7 +46,8 @@ describe("ProfileStatus component", () => {
         const instance = component.getInstance();
         // @ts-ignore
         instance.deactivateEditMode()
-        expect(mockCallback.mock.calls.length).toBe(1);
+        expect(mockCallback.mock.calls.length).toBe(1); //  mockcallback фунция,чтобы мы узнали бвл ли доступ к updateStatus, ожидаем что функция была вызвана 1 раз при пререходе к deactivateEditMode()
+
     });
 
 

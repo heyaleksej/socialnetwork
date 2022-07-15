@@ -1,7 +1,6 @@
 import React from "react";
 import s from './ProfileInfo.module.css'
 import { ProfileTypeFromServer} from "../../../Redux/profileReducer";
-import {ProfileStatus} from "../ProfileStatus/ProfileStatus";
 import { Preloader } from "../../../common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "../ProfileStatus/ProfileStatusWithHooks";
 

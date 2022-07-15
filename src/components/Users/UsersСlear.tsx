@@ -25,7 +25,7 @@ export const UsersClear = ({
 
     return <div>
         <Paginator CurrentPage={CurrentPage} SetPageHandler={SetPageHandler} pageSize={pageSize}
-                   totalCount={totalCount}/>
+                   totalCount={totalCount} PortionSize={10}/>
         {props.users.map(m => <User key={m.id} unfollow={props.unfollow} follow={props.follow}
                                     followingInProgress={followingInProgress} user={m}/>)}
 
