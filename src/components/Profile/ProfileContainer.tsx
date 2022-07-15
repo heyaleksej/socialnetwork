@@ -23,7 +23,7 @@ type PathParamsType = {
 
 export type WithRouterPropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
-class ProfileClass extends React.Component<WithRouterPropsType> {
+class ProfileContainer extends React.Component<WithRouterPropsType> {
 
     componentDidMount = () => {
         let userId = this.props.match.params.userId
@@ -67,4 +67,4 @@ let mapToStateToProps = (state: AppStateType): MapStatePropsType => {
 export default compose<React.ComponentType>(RedirectIfNotAuth,
     connect(mapToStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC}),
     withRouter)
-(ProfileClass);
+(ProfileContainer) as React.FunctionComponent<any>

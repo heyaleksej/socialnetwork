@@ -39,5 +39,5 @@ const mapDispatchToProps = (dispatch: Dispatch): mapDispatchPropsType => {
     }
 }
 
-export default  compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),RedirectIfNotAuth)(Dialogs)
+export default compose<React.ComponentType>(connect(mapStateToProps, mapDispatchToProps),RedirectIfNotAuth)(Dialogs) as React.FunctionComponent<any>
 
