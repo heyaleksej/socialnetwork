@@ -1,6 +1,6 @@
 import React from "react";
 
-export const RequiredField = (value: any) => {
+export const RequiredField: FieldValidatorType = (value: string) => {
     return !value ? 'Field is required': undefined
 
 }
@@ -10,3 +10,5 @@ export const MaxLength = (MaxLength: number) => (value: any) => {
     return undefined
 
 }
+
+export type FieldValidatorType = (value: string) => string | undefined

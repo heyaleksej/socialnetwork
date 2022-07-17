@@ -2,6 +2,9 @@ import {PostsType} from "./store";
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {ProfileApi, UsersApi} from "../DAL/api";
+import { ProfileType } from "../components/Profile/ProfileInfo/ProfileInfo";
+import { BaseThunkType } from "./redux-store";
+import { FormAction, stopSubmit } from "redux-form";
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -9,6 +12,7 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const UPDATE_STATUS = 'UPDATE_STATUS'
 const DELETE_POST = 'DELETE_POST'
+const ADD_PHOTO_SUCCESS = 'ADD_PHOTO_SUCCESS'
 
 type addPostType = ReturnType<typeof addPostActionCreator>
 type onPostChangeType = ReturnType<typeof onPostChangeActionCreator>
@@ -16,6 +20,7 @@ type setUserProfileType = ReturnType<typeof setUserProfile>
 type setStatusType = ReturnType<typeof SetStatusAC>
 type updateStatusType = ReturnType<typeof updateStatusAC>
 type deletePostType = ReturnType<typeof deletePost>
+type addNewPhotoType = ReturnType<typeof addPhotoSuccess>
 
 export type ProfileActionsTypes =
     addPostType |
@@ -23,9 +28,13 @@ export type ProfileActionsTypes =
     setUserProfileType |
     setStatusType |
     updateStatusType |
-    deletePostType
+    deletePostType |
+    addNewPhotoType
 
-
+export type PhotosType = {
+    small: string | null
+    large: string | null
+}
 
 
 export type ProfileTypeFromServer = {
@@ -33,6 +42,7 @@ export type ProfileTypeFromServer = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
+    aboutMe:string
     contacts: {
         github: string
         vk: string
@@ -72,6 +82,8 @@ let initialState = {
 }
 
 
+
+
 export const profileReducer = (state: initialStateType = initialState, action: ProfileActionsTypes): initialStateType => {
     switch (action.type) {
         case ADD_POST :
@@ -99,6 +111,9 @@ export const profileReducer = (state: initialStateType = initialState, action: P
                 ...state, posts: state.posts.filter(f => f.id != action.postID)
             }
         }
+        case ADD_PHOTO_SUCCESS:{
+            return {...state, profile: {...state.profile, photos: action.photos} as ProfileTypeFromServer}
+        }
         default:
             return state
     }
@@ -118,6 +133,7 @@ export const setUserProfile = (profile: ProfileTypeFromServer) => {
 export const SetStatusAC =(status:string)=>({type: SET_STATUS, status} as const)
 export const updateStatusAC =(status: string)=>({type: UPDATE_STATUS, status} as const)
 export const deletePost = (postID:string)=>({type:DELETE_POST, postID} as const)
+export const addPhotoSuccess = (photos:any)=>({type:ADD_PHOTO_SUCCESS, photos} as const)
 
 export const getUserProfileTC = (userId: string): any => {
     return (
@@ -156,3 +172,35 @@ export const updateStatusTC = (status: string): any =>{
 
     }
 }
+
+export const addNewPhoto = (photo: File): any =>{
+    return (dispatch: Dispatch<ProfileActionsTypes>) =>{
+        ProfileApi.safePhoto(photo).then(response => {
+            if (response.data.resultCode === 0)
+                dispatch(addPhotoSuccess(response.data.data.photos))
+
+        })
+
+    }
+}
+
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
+    const userId = getState().auth.id
+
+    const data = await ProfileApi.saveProfile(profile)
+
+    if (data.resultCode === 0) {
+
+        if (userId != null) {
+            dispatch(getUserProfileTC(userId))
+        } else {
+            throw new Error("userId can't be null")
+        }
+    } else {
+        dispatch(stopSubmit("edit-profile", {_error: data.messages[0] }))
+        return Promise.reject(data.messages[0])
+    }
+}
+
+type ThunkType = BaseThunkType<ProfileActionsTypes | FormAction>
+
