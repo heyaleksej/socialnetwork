@@ -1,6 +1,5 @@
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import React , {FC} from "react";
-import {CustomInput} from "../CustomInput/CustomForms";
 import {MaxLength, RequiredField} from "../../Utils/Validators/Validators";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../Redux/authReducer";
@@ -49,23 +48,22 @@ const MaxL = MaxLength(25)
 const LoginForm: FC<InjectedFormProps<FormDataType, LoginFormProps> & LoginFormProps> = ({error, handleSubmit,captchaUrl}) => {
     return <form onSubmit={handleSubmit}>
         <div>
-            <Field type={'input'} placeholder={"login..."} component={CustomInput} name={'email'}
+            <Field type={'input'} placeholder={"login..."} component={Input} name={'email'}
                    validate={[RequiredField, MaxL]}
             />
         </div>
         <div>
-            <Field type={'input'} types={'password'} placeholder={'password...'} component={CustomInput}
+            <Field type={'input'} types={'password'} placeholder={'password...'} component={Input}
                    name={'password'}
                    validate={[RequiredField, MaxL]}/>
 
         </div>
         <div>
-            <Field type={"checkbox"} component={CustomInput} name={'rememberMe'}/> remember me
+            <span>remember me <Field type={"checkbox"} component={Input} name={'rememberMe'}/></span>
         </div>
         {captchaUrl && <img className={s.captchaImg} src={captchaUrl}/>}
         {captchaUrl && <button onClick={()=>{}}>&#8635;</button>}
-        {captchaUrl && createField
-        ('Symbols from image', 'captcha', [RequiredField], Input, {})}
+        {captchaUrl && createField('Symbols from image', 'captcha', [RequiredField], Input, {})}
 
 
 

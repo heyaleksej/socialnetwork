@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 import {ContactsType, ProfileDataPropsType} from "./ProfileInfo";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, Input, Textarea} from "../../../common/FormControl/FormControl";
-import s from './ProfileInfo.module.css'
+import s from './ProfileDataForm.module.css'
 
 type FormDataType = {
     email: string
@@ -31,31 +31,33 @@ type PropsType = {
 
 
 const ProfileData: FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({profile, handleSubmit, error}) => {
-    return <form onSubmit={handleSubmit}>
+    return <form onSubmit={handleSubmit} className={s.box}>
         <button>save</button>
         {error && <div className={s.error}>{error}</div>}
 
         <div>
-            <b>fullName</b>: {createField('Full name', 'fullName',[], Input
-            )}
-        </div>
-        <div>
-            <b>aboutMe</b>: {createField('что нибудь', 'aboutMe',[], Input
+            <b>fullName</b>: {createField('Full name', 'fullName', [], Input
         )}
         </div>
         <div>
-            <b>Looking for a job</b>:{createField('da', 'lookingForAJob',[], Input, {type: 'checkbox'}
+            <b>aboutMe</b>: {createField('что нибудь', 'aboutMe', [], Input
         )}
         </div>
         <div>
-            <b> что могу </b>: {createField('Расскажите о своем опыте', 'lookingForAJobDescription',[], Textarea)}
+            <b>Looking for a job</b>:{createField('', 'lookingForAJob', [], Input, {type: 'checkbox'}
+        )}
         </div>
         <div>
-            <b> Contacts </b>: {profile && Object.keys(profile.contacts).map((key) => {
-            return <div key={key}>
-                <b>{key}</b>: {createField(key, 'contacts.'+ key,[], Input)}
+            <b> Skills </b>: {createField('Расскажите о своем опыте', 'lookingForAJobDescription', [], Input)}
+        </div>
+        <div>
+            <div className={s.contactsBox}><b> Contacts </b>: {profile && Object.keys(profile.contacts).map((key) => {
+                return <div key={key}>
+                    <b>{key}: {createField(key, 'contacts.' + key, [], Input)}</b>
+                </div>
+
+            })}
             </div>
-        })}
         </div>
     </form>
 }

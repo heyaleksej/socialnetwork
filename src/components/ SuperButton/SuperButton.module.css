@@ -1,0 +1,68 @@
+.button {
+
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 45px;
+    border-radius: 45px;
+    margin: 7px 15px;
+    /*font-family: 'Montserrat', sans-serif;*/
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: #524f4e;
+    background: white;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: .3s;
+}
+.button:hover {
+    background: #2EE59D;
+    box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
+    color: white;
+    transform: translateY(-7px);
+}
+
+
+
+
+
+.red:hover {
+    background: #e32323;
+    box-shadow: 0 15px 20px rgba(124, 23, 59, 0.4);
+
+    color: white;
+    transform: translateY(-7px);
+
+
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.disabled:hover {
+    transform: translateY(-0px);
+}
+
+.default{
+
+}
+
+
+
+@media screen and (max-width: 500px) {
+
+    .button {
+        letter-spacing: 0px;
+        width: 77px;
+        height: 43px;
+        border-radius: 25px;
+        margin: 1px 1px;
+        font-size: 11px;
+        font-weight: 800;
+    }}
+
+

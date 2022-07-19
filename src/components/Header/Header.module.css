@@ -1,11 +1,105 @@
-.header{
-    grid-area: h;
-    background: green;
-}
-.header img{
-    width: 60px;
+.header {
+    min-height: 73px;
+    line-height: 73px;
+    width: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+    transition: all 0.45s ease 0s;
+    box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
+    /*grid-area: header;*/
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: right;
 }
 
-.login{
-    float: right;
+.header__logo {
+    height: 45px;
+}
+
+/*.title {*/
+/*    color: #3f414d;;*/
+/*    margin-left: 10px;*/
+/*    font-weight: 400;*/
+/*    font-style: normal;*/
+/*    font-size: 28px;*/
+/*    font-family: 'Poppins', sans-serif;*/
+/*    line-height: 45px;*/
+/*}*/
+
+.link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding-left: 15px;
+}
+
+
+.wrap {
+    display: flex;
+    align-items: center;
+}
+
+
+.ava {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+}
+
+
+.title {
+    font-weight: 400;
+    margin: 0px;
+    color: #3f414d;
+    padding: 0 15px;
+}
+
+.containerAva {
+    display: flex;
+    align-items: center;
+}
+
+.loginWrap {
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+}
+
+.logout {
+    background-image: url('./../../common/logos/logout-svgrepo-com.svg');
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    opacity: 0.7;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.logout:hover {
+    opacity: 0.5;
+}
+
+.login {
+    text-decoration: none;
+    padding-right: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 15px 0;
+    color: #1a73e8;
+    text-transform: capitalize;
+    text-shadow: none;
+    font-family: "Open Sans","HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+    line-height: 1.2;
+}
+
+.login:hover {
+    opacity: 0.7;
 }

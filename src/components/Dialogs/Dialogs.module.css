@@ -1,27 +1,70 @@
-.dialogs{
-    display: grid;
-    grid-template-columns: 2fr 4fr;
-
+.dialogs__wrapper {
+    display: flex;
 }
 
-.dialogsItems {
-    padding: 15px;
-
+.dialogList,
+.messageList{
+    padding: 10px;
+    list-style: none;
 }
 
-.dialogsItems .active {
-    color: gold;
+.dialogs {
+    width: 35%;
+    margin-right: 20px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
-
 
 .messages {
-    padding: 15px;
-
-
+    border-radius: 5px;
+    box-shadow: 0 0 20px 0 rgba(44, 101, 144, 0.1);
+    background-image: url("https://iqonic.design/themes/socialv/html/images/page-img/100.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 65%;
 }
 
-.messages .message {
 
+.box {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.textarea {
+    height: 45px;
+    line-height: 45px;
+    padding: 5px;
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #f1f1f1;
+    font-size: 14px;
+    color: #a09e9e;
+    border-radius: 10px;
+    resize: none;
+    width: 400px;
 }
 
 
+.btn {
+    position: relative;
+    background: #50b5ff;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0.5rem;
+    font-weight: bold;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 5px;
+}

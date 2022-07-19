@@ -1,15 +1,18 @@
 import {Dispatch} from "redux";
-import {AuthApi, SecureApi} from "../DAL/api";
+import {AuthApi, ProfileApi, SecureApi} from "../DAL/api";
 import {stopSubmit} from "redux-form";
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS'
+const SET_PROFILE_L_PHOTO = 'SET_PROFILE_L_PHOTO'
 
 
 type setAuthUserType = ReturnType<typeof setAuthUser>
 type getCaptchaUrlSuccessType = ReturnType<typeof getCaptchaUrlSuccess>
+type SetProfilePhotoType = ReturnType<typeof setProfileLPhotoSuccess>
 
-type actionType = getCaptchaUrlSuccessType | setAuthUserType
+
+type actionType = getCaptchaUrlSuccessType | setAuthUserType | SetProfilePhotoType
 
 
 export type initialStateType = {
@@ -18,6 +21,8 @@ export type initialStateType = {
     email: string | null
     isAuth: boolean
     captchaUrl: string | null
+    profilePhoto: string | undefined
+
 }
 
 let initialState: initialStateType = {
@@ -25,7 +30,9 @@ let initialState: initialStateType = {
     login: null,
     email: null,
     isAuth: false,
-    captchaUrl: null
+    captchaUrl: null,
+    profilePhoto: undefined
+
 
 }
 
@@ -35,6 +42,7 @@ export const authReducer = (state: initialStateType = initialState, action: acti
 
         case SET_AUTH_USER_DATA:
         case GET_CAPTCHA_URL_SUCCESS:
+        case SET_PROFILE_L_PHOTO:
             return {
                 ...state,
                 ...action.payload
@@ -46,11 +54,16 @@ export const authReducer = (state: initialStateType = initialState, action: acti
     }
 }
 
-export const setAuthUser = (id: string | undefined, email: string | null, login: string | null, isAuth: boolean) =>
+export const setAuthUser = (id: string |undefined, email: string | null, login: string | null, isAuth: boolean) =>
     ({type: SET_AUTH_USER_DATA, payload: {id, email, login, isAuth}} as const)
 
 export const getCaptchaUrlSuccess = (captchaUrl:string) =>
     ({type: GET_CAPTCHA_URL_SUCCESS, payload: {captchaUrl}} as const)
+
+export const setProfileLPhotoSuccess = (profilePhoto: string | undefined) => ({
+    type: SET_PROFILE_L_PHOTO,
+    payload: {profilePhoto},
+} as const);
 
 export const getAuthUserTC = (): any => {
     return (dispatch: Dispatch<setAuthUserType>) => {
@@ -85,6 +98,7 @@ export const logOut = (): any => (dispatch: Dispatch<setAuthUserType>) => {
             dispatch(setAuthUser(undefined, null, null, false))
         }
 
+
     })
 
 
@@ -100,4 +114,16 @@ export const getCaptchaUrl = (): any => (dispatch: Dispatch<actionType>) => {
 
 }
 
+export const setProfileLPhoto = (userId: string | undefined) => {
+    return async (dispatch: any) => {
+        try {
+            if (userId) {
+                const response = await ProfileApi.getProfileLPhoto(userId);
+                dispatch(setProfileLPhotoSuccess(response));
+            }
+        } catch (error) {
+            console.log(`Error setting profile small photo. ${error}`);
+        }
+    }
+}
 

@@ -36,7 +36,7 @@ type ContactsPropsType = {
 export type ProfileDataPropsType = {
     profile: ProfileTypeFromServer
     isOwner: boolean
-    goToEditMode: ()=>void
+    goToEditMode: () => void
 }
 
 export type ProfileType = {
@@ -54,7 +54,6 @@ export const Contact = ({contactTitle, contactValue}: ContactsPropsType) => {
         <b>{contactTitle}</b>:{contactValue}
     </div>
 }
-
 
 
 const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => {
@@ -79,11 +78,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}: ProfileDataPropsType) => 
 }
 
 
-
-
-
-
-export function ProfileInfo({profile, saveProfile,...props}: ProfileInfoPropsType) {
+export function ProfileInfo({profile, saveProfile, ...props}: ProfileInfoPropsType) {
     const [editMode, setEditMode] = useState(false)
 
     if (!profile) {
@@ -96,27 +91,36 @@ export function ProfileInfo({profile, saveProfile,...props}: ProfileInfoPropsTyp
         }
     }
 
-    const goToEditModeHandler =()=>{
+    const goToEditModeHandler = () => {
         setEditMode(true)
     }
 
     const onSubmit = (formData: ProfileType) => {
         console.log(formData)
         saveProfile(formData).then(
-            () => {setEditMode(false)}
+            () => {
+                setEditMode(false)
+            }
         );
     }
 
 
     return (
         <div>
-            <ProfileStatusWithHooks status={props.status} updateStatusTC={props.updateStatusTC}/>
-            <img src={profile.photos.large || userPhoto}/>
-
-            {props.isOwner && <input type={'file'} onChange={AddAvatar}/>}
-            {editMode ? <ProfileDataFormWithRedux initialValues={profile} profile={profile} onSubmit={onSubmit} />: <ProfileData profile={profile} isOwner={props.isOwner} goToEditMode={goToEditModeHandler}/>}
-
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgQyG5V9oSD7hP7SZePDYuC56TCQkLWUt6Rg&usqp=CAU"/>
+            <div className={s.statusContainer}>
+                <ProfileStatusWithHooks status={props.status} updateStatusTC={props.updateStatusTC}/>
+            </div>
+            <div className={s.profileInfoBox}>
+                <div className={s.userAvatar}>
+                    <img className={s.userAvatar} src={profile.photos.large || userPhoto}/>
+                    {props.isOwner && <input type={'file'} onChange={AddAvatar}/>}
+                </div>
+                <div className={s.contactsSection}>
+                    {editMode ?
+                        <ProfileDataFormWithRedux initialValues={profile} profile={profile} onSubmit={onSubmit}/> :
+                        <ProfileData profile={profile} isOwner={props.isOwner} goToEditMode={goToEditModeHandler}/>}
+                </div>
+            </div>
         </div>
 
     )

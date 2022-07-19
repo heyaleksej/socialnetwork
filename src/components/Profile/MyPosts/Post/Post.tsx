@@ -1,16 +1,22 @@
 import React from 'react';
 import s from './Post.module.css'
-import {PostsType} from "../../../../Redux/store";
+import heart from './../../../../common/Emoji/2764.svg'
+
+type PostType = {
+    message: string
+    like: number
+    userPhoto: string | null | undefined,
+}
 
 
-const Post = (props:PostsType) => {
+const Post = (props:PostType) => {
     return (
-        <div className={s.item}>
-            <img src={'https://topmsg.ru/wp-content/uploads/anonymous.jpg'}/>
-            {props.message}
-            <div>
-                <span>Like{props.like}</span>
-            </div>
+        <div className={s.wrap}>
+            {props.userPhoto && <img className={s.img} src={props.userPhoto}/>}
+            <div className={s.text}>{props.message}</div>
+            <div className={s.likeBlock}>
+                <img className={s.likeBtn} src={heart}/>
+                <p className={s.likeNum}>{props.like}</p></div>
         </div>);
 
 

@@ -22,7 +22,7 @@ type mapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         posts: state.profilePage.posts,
-        message: state.profilePage.newPostText
+        message: state.profilePage.newPostText,
     }
 }
 

@@ -1,26 +1,39 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import s from './Header.module.css'
 
 type HeaderPropsType = {
     isAuth: boolean
     login: string | null
-    logOut:()=> void
+    logOut: () => void
+    profilePhoto:string | undefined
+
 }
 
-const Header =(props: HeaderPropsType)=>{
-   return (
+export const Header = (props: HeaderPropsType) => {
+    return (
 
         <header className={s.header}>
-            <img src='https://s.starladder.com/uploads/team_logo/d/4/d/3/ce3c2349c7e3a70dac35cf4a28c400b9.png'></img>
+            <div className={s.wrap}>
 
-            <div className={s.login}>
                 {props.isAuth
-                    ? <div>{props.login} -<button onClick={props.logOut}>Log Out</button></div>
-                    :<NavLink to={'/login'}>login </NavLink>}
+                    ? <div className={s.loginWrap}>
+                        <div className={s.box}>
+                            <p className={s.title}>{props.login}</p>
+                            <img className={s.ava}
+                                 src={props.profilePhoto}
+                                 alt='ava'></img>
+                        </div>
+                        <div onClick={props.logOut} className={s.logout}></div>
+
+                    </div>
+
+                    : <NavLink to={'/login'} className={s.login}>log in</NavLink>
+
+                }
             </div>
         </header>
-   )
+    )
 
 }
 

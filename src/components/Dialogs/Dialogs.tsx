@@ -4,9 +4,10 @@ import Dialog from './Dialogs/Dialog';
 import Message from './Message/Message';
 import {DialogsType, MessageType} from "../../Redux/store";
 import Avatar from '../MiniAvatars/Avatar';
-import {CustomInput} from "../CustomInput/CustomForms";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {MaxLength, RequiredField} from "../../Utils/Validators/Validators";
+import SuperButton from "../ SuperButton/SuperButton";
+import {Textarea} from "../../common/FormControl/FormControl";
 
 type DialogsPropsType = {
     dialogs: Array<DialogsType>
@@ -36,19 +37,23 @@ function Dialogs(props: DialogsPropsType) {
 
     const MaxL = MaxLength(50)
 
+    const finalClassName = `${s.btn}`
+
+
 
     const DialogsForm: React.FC<InjectedFormProps<DialogsFormType>> = (props) => {
-        return <form onSubmit={props.handleSubmit}>
+        return <form className={s.box} onSubmit={props.handleSubmit}>
             <div>
                 <Field placeholder={"Enter message..."}
-                       component={CustomInput}
+                       component={Textarea}
                        type="textarea"
                        name={'newMessage'}
                        validate={[RequiredField, MaxL]}
+                       className={s.textarea}
                 />
             </div>
             <div>
-                <button> Send Message</button>
+                <SuperButton name={'Send' + ' ' + '\u27A4'} cn={finalClassName}/>
             </div>
         </form>
 
@@ -62,11 +67,16 @@ function Dialogs(props: DialogsPropsType) {
 
 
     return (
-        <div className={s.dialogs}>
-            <span className={s.dialogsItems}> {dialogsElements} </span>
+        <div className={s.dialogs__wrapper}>
+            <div className={s.dialogs}>
+                <ul className={s.dialogList}>
+                    {dialogsElements}
+                </ul>
+            </div>
             <div className={s.messages}>
-                {messagesElements}
-                {/*<CustomForms title={'send text'} value={props.text} onChange={onMessageChange} onClick={addMessage}/>*/}
+                <ul className={s.messageList}>
+                    {messagesElements}
+                </ul>
                 <DialogsReduxForm onSubmit={onSubmit}/>
             </div>
         </div>

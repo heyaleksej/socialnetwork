@@ -71,6 +71,10 @@ export const ProfileApi = {
 
     saveProfile(profile: ProfileType) {
         return instance.put(`profile`, profile).then(response => response.data);
+    },
+
+    getProfileLPhoto(userId: string){
+        return instance.get(`profile/${userId}`).then(response=>response.data.photos.large)
     }
 
 }
