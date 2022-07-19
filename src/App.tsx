@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Nav from './components/Navbar/Nav';
-import {Route, withRouter} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import Music from './components/Navbar/Music/Music';
 import News from "./components/Navbar/News/News";
 import Settings from "./components/Navbar/Settings/Settings";
@@ -11,7 +11,7 @@ import {compose} from "redux";
 // import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from './components/Login/Login';
+import {Login} from './components/Login/Login';
 import {connect} from "react-redux";
 import {InitializeApp} from "./Redux/appReducer";
 import {Preloader} from "./common/Preloader/Preloader";
@@ -46,13 +46,18 @@ class App extends React.Component<any, any> {
                 <HeaderContainer/>
                 <Nav/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/settings' component={Settings}/>
-                    <Route path='/users' component={UsersContainer}/>
-                    <Route path='/login' component={Login}/>
+                    <Switch>
+                        <Route exact path='/' render={()=><Redirect to={'/profile'}/>}/>
+
+                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                        <Route path='/music' component={Music}/>
+                        <Route path='/news' component={News}/>
+                        <Route path='/settings' component={Settings}/>
+                        <Route path='/users' component={UsersContainer}/>
+                        <Route path='/login' component={Login}/>
+                        <Route path='*' render={()=><div>404</div>}/>
+                    </Switch>
 
                 </div>
             </div>

@@ -1,23 +1,52 @@
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
-import React from "react";
+import React , {FC} from "react";
 import {CustomInput} from "../CustomInput/CustomForms";
 import {MaxLength, RequiredField} from "../../Utils/Validators/Validators";
-import {connect, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../Redux/authReducer";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../Redux/redux-store";
 import s from './../CustomInput/CustomForms.module.css'
+import {createField, Input} from "../../common/FormControl/FormControl";
+
+
+export const Login = () => {
+
+    const isAuth = useSelector<AppStateType>(state => state.auth.isAuth)
+    const captchaUrl = useSelector((state: AppStateType) => state.auth.captchaUrl)
+    const dispatch = useDispatch()
+
+    const onSubmit = (formData: FormDataType) => {
+        dispatch(loginTC(formData.email, formData.password, formData.rememberMe, formData.captcha))
+    }
+
+
+    if (isAuth) return <Redirect to={'/profile'}/>
+
+    return (
+        <div>
+        <h1>Login</h1>
+        <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+    </div>
+    )
+}
 
 type FormDataType = {
+    captcha: string
     email: string
     password: string
     rememberMe: boolean
 }
 
+type LoginFormProps = {
+    captchaUrl: string | null
+}
+
 const MaxL = MaxLength(25)
 
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({error, handleSubmit}) => {
+
+const LoginForm: FC<InjectedFormProps<FormDataType, LoginFormProps> & LoginFormProps> = ({error, handleSubmit,captchaUrl}) => {
     return <form onSubmit={handleSubmit}>
         <div>
             <Field type={'input'} placeholder={"login..."} component={CustomInput} name={'email'}
@@ -33,30 +62,25 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({error, handleSubm
         <div>
             <Field type={"checkbox"} component={CustomInput} name={'rememberMe'}/> remember me
         </div>
+        {captchaUrl && <img className={s.captchaImg} src={captchaUrl}/>}
+        {captchaUrl && <button onClick={()=>{}}>&#8635;</button>}
+        {captchaUrl && createField
+        ('Symbols from image', 'captcha', [RequiredField], Input, {})}
+
+
+
         {error && <div className={s.formSomeError}>
+
             {error}
         </div>}
         <div>
-            <button> Log in</button>
+            <button type={'submit'}> Log in</button>
         </div>
     </form>
 }
 
-const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
+export const LoginReduxForm = reduxForm<FormDataType, LoginFormProps>({form: 'login'})(LoginForm)
 
-const Login = (props: any) => {
 
-    const onSubmit = (formData: FormDataType) => {
-        props.loginTC(formData.email, formData.password, formData.rememberMe)
-    }
-    const isAuth = useSelector<AppStateType, boolean>(state => state.auth.isAuth)
 
-    if (isAuth) return <Redirect to={'/profile'}/>
-
-    return <>
-        <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
-    </>
-}
-
-export default connect(null, {loginTC})(Login)
+// export default connect(null, {loginTC})(Login)
