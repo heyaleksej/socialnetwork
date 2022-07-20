@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from "./Post/Post";
-import {PostsType} from "../../../Redux/store";
+import {PostsType} from "../../../Redux/types";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {MaxLength, RequiredField} from "../../../Utils/Validators/Validators";
-import {Input} from "../../../common/FormControl/FormControl";
+import {Textarea} from "../../../common/FormControl/FormControl";
 import SuperButton from "../../ SuperButton/SuperButton";
 
 
@@ -22,28 +22,31 @@ type MyPostsFormType = {
     addForm: string
 }
 
-const MaxL = MaxLength(10)
-
-const MyPostForm: React.FC<InjectedFormProps<MyPostsFormType>> = (props) => {
-    return <form onSubmit={props.handleSubmit}>
-        <div className={s.input}>
-            <Field placeholder={"Enter text..."}
-                   component={Input}
-                   type={"input"}
-                   name={'addForm'}
-                   validate={[RequiredField, MaxL]}
-            />
-                        <SuperButton name={"Add Post"} cn={'null'}/>
-
-        </div>
-
-    </form>
-
-}
-const AddPostReduxForm = reduxForm<MyPostsFormType>({form: 'addForm'})(MyPostForm)
-
 
 const MyPosts = (props: MyPostsPropsType) => {
+
+    const MyPostForm: React.FC<InjectedFormProps<MyPostsFormType>> = (props) => {
+        return <form onSubmit={props.handleSubmit}>
+            <div className={s.input}>
+                <Field placeholder={"Enter text..."}
+                       component={Textarea}
+                       type={"input"}
+                       name={'addForm'}
+                       validate={[RequiredField, MaxL]}
+                />
+                <div>
+                    <SuperButton name={"Add Post"} cn={'null'}/>
+                </div>
+
+            </div>
+
+        </form>
+
+    }
+
+    const MaxL = MaxLength(10)
+
+    const AddPostReduxForm = reduxForm<MyPostsFormType>({form: 'addForm'})(MyPostForm)
 
     const onSubmit = (values: any) => {
         props.addPost(values.addForm)

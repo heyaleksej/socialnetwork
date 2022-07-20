@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Nav.module.css'
 import Sidebar from "./Sidebar/Sidebar";
-import {DialogsPageType, DialogsType, RootStateType} from "../../Redux/store";
+import {DialogsPageType, DialogsType, RootStateType} from "../../Redux/types";
 
 type NavType={
 

@@ -4,7 +4,7 @@ import {ProfileTypeFromServer} from "../../../Redux/profileReducer";
 import {Preloader} from "../../../common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "../ProfileStatus/ProfileStatusWithHooks";
 import userPhoto from './../../../common/img/Sample_User_Icon.png'
-import ProfileDataForm, {PhotosType} from "./ProfileDataForm";
+import {PhotosType} from "./ProfileDataForm";
 import ProfileDataFormWithRedux from "./ProfileDataForm";
 
 export type ProfileInfoPropsType = {

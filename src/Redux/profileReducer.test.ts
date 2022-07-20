@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {deletePost, profileReducer} from "./profileReducer";
-import {PostsType} from "./store";
+import {PostsType} from "./types";
 
 let state = {
     posts: [

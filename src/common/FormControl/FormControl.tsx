@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import style from './FormControl.module.css';
 import {Field, WrappedFieldMetaProps, WrappedFieldProps} from 'redux-form';
@@ -30,8 +28,7 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
     )
 }
 
-// @ts-ignore
-const FormControl: React.FC<FormControlPropsType> = ({input, meta: {touched, error}, children, ...props}) => {
+const FormControl: React.FC<FormControlPropsType> = ({meta: {touched, error}, children, ...props}) => {
     const hasError = touched && error
     return (
         <div className={`${style.boxTextarea} ${style.formControl} ${hasError ? style.error : ''}`}>
@@ -57,4 +54,3 @@ export function createField<FormKeysType extends string>(placeholder: string | u
     </div>
 }
 
-export type GetStringKeys<T> = Extract<keyof T, string>

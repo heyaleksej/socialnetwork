@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import Dialog from './Dialogs/Dialog';
 import Message from './Message/Message';
-import {DialogsType, MessageType} from "../../Redux/store";
+import {DialogsType, MessageType} from "../../Redux/types";
 import Avatar from '../MiniAvatars/Avatar';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {MaxLength, RequiredField} from "../../Utils/Validators/Validators";
@@ -32,8 +32,6 @@ function Dialogs(props: DialogsPropsType) {
     )
 
     let messagesElements = props.messages.map((m, index) => <Message key={index} text={m.text}/>)
-
-    // let messagesAvatar =props.dialogsPage.dialogs.map(m=> <Avatar ava={m.ava}/>)
 
     const MaxL = MaxLength(50)
 
@@ -67,7 +65,7 @@ function Dialogs(props: DialogsPropsType) {
 
 
     return (
-        <div className={s.dialogs__wrapper}>
+        <div className={s.dialogsWrapper}>
             <div className={s.dialogs}>
                 <ul className={s.dialogList}>
                     {dialogsElements}
@@ -77,7 +75,7 @@ function Dialogs(props: DialogsPropsType) {
                 <ul className={s.messageList}>
                     {messagesElements}
                 </ul>
-                <DialogsReduxForm onSubmit={onSubmit}/>
+                <DialogsReduxForm  onSubmit={onSubmit}/>
             </div>
         </div>
     )

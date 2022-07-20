@@ -3,7 +3,7 @@ import {addPostActionCreator, onPostChangeActionCreator} from '../../../Redux/pr
 import MyPosts from './MyPosts';
 import {connect} from "react-redux";
 import {AppStateType} from "../../../Redux/redux-store";
-import {PostsType} from "../../../Redux/store";
+import {PostsType} from "../../../Redux/types";
 import {Dispatch} from "redux";
 
 type MapStatePropsType = {

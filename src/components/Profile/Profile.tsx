@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {ProfileInfo, ProfileType} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileTypeFromServer} from "../../Redux/profileReducer";
@@ -7,16 +7,10 @@ import s from './Profile.module.css'
 type ProfilePropsType = {
     profile?: ProfileTypeFromServer | null
     status: string
-    updateStatusTC:(status:string)=>void
+    updateStatusTC: (status: string) => void
     isOwner: boolean
-    addNewPhoto:(photo: File)=>void
+    addNewPhoto: (photo: File) => void
     saveProfile: (profile: ProfileType) => Promise<any>
-
-
-
-
-
-
 }
 
 

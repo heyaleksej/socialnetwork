@@ -78,8 +78,6 @@ let mapToStateToProps = (state: AppStateType): MapStatePropsType => {
         status: state.profilePage.status,
         isAuth: state.auth.isAuth,
         authId: state.auth.id
-
-
     }
 
 }

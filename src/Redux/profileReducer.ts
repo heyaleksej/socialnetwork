@@ -1,4 +1,4 @@
-import {PostsType} from "./store";
+import {PostsType} from "./types";
 import {v1} from "uuid";
 import {Dispatch} from "redux";
 import {ProfileApi, UsersApi} from "../DAL/api";
@@ -30,11 +30,6 @@ export type ProfileActionsTypes =
     updateStatusType |
     deletePostType |
     addNewPhotoType
-
-export type PhotosType = {
-    small: string | null
-    large: string | null
-}
 
 
 export type ProfileTypeFromServer = {
@@ -73,7 +68,7 @@ let initialState = {
     posts: [
         {id: v1(), message: 'hello', like: 2},
         {id: v1(), message: 'postav like pliz', like: 5}
-    ],
+    ] as PostsType[],
     newPostText: '',
     profile: null,
     status: '',
@@ -145,7 +140,7 @@ export const getUserProfileTC = (userId: string): any => {
     )
 }
 
-// refactoring
+// refactoring async
 //
 // export const getUserProfileTC = (userId: string): any => async (dispatch: Dispatch<ProfileActionsTypes>) => {
 //             const response:any = UsersApi.getUserProfile(userId)

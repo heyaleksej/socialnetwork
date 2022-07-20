@@ -1,4 +1,4 @@
-import {ActionsTypes} from "./store";
+import {ActionsTypes} from "./types";
 import {v1} from "uuid";
 
 const ADD_MESSAGE = 'ADD-MESSAGE'

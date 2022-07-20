@@ -1,14 +1,9 @@
 import React, {FC} from "react";
-import {ContactsType, ProfileDataPropsType} from "./ProfileInfo";
+import {ContactsType} from "./ProfileInfo";
 import {InjectedFormProps, reduxForm} from "redux-form";
-import {createField, Input, Textarea} from "../../../common/FormControl/FormControl";
+import {createField, Input} from "../../../common/FormControl/FormControl";
 import s from './ProfileDataForm.module.css'
 
-type FormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-}
 
 export type PhotosType = {
     small: string | null
