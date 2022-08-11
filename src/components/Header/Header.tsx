@@ -22,7 +22,7 @@ export const Header = (props: HeaderPropsType) => {
                             <p className={s.title}>{props.login}</p>
                             <img className={s.ava}
                                  src={props.profilePhoto}
-                                 alt='ava'></img>
+                                 alt='ava'/>
                         </div>
                         <div onClick={props.logOut} className={s.logout}></div>
 

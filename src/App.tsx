@@ -8,8 +8,6 @@ import Settings from "./components/Navbar/Settings/Settings";
 import {AppStateType} from "./Redux/redux-store";
 import {compose} from "redux";
 import s from './App.module.css'
-// import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-// import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {Login} from './components/Login/Login';
 import {connect} from "react-redux";
