@@ -1,37 +1,25 @@
 .header {
     min-height: 73px;
     line-height: 73px;
-    width: 100%;
-    margin: 0 auto;
     background: #ffffff;
     transition: all 0.45s ease 0s;
     box-shadow: 0px 0px 20px 0px rgba(44, 101, 144, 0.1);
-    /*grid-area: header;*/
     display: flex;
     border-radius: 5px;
     align-items: center;
     justify-content: right;
+    padding-right: 18px;
 }
 
 .header__logo {
     height: 45px;
 }
 
-/*.title {*/
-/*    color: #3f414d;;*/
-/*    margin-left: 10px;*/
-/*    font-weight: 400;*/
-/*    font-style: normal;*/
-/*    font-size: 28px;*/
-/*    font-family: 'Poppins', sans-serif;*/
-/*    line-height: 45px;*/
-/*}*/
-
 .link {
     display: flex;
     align-items: center;
     text-decoration: none;
-    padding-left: 15px;
+    padding-left: 20px;
 }
 
 
@@ -76,6 +64,7 @@
 .logout {
     background-image: url('./../../common/logos/logout-svgrepo-com.svg');
     background-repeat: no-repeat;
+    background-color: white;
     width: 30px;
     height: 30px;
     opacity: 0.7;

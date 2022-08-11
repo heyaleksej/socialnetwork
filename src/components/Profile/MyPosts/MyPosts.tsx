@@ -14,8 +14,6 @@ type MyPostsPropsType = {
     message: string
     userPhoto: string | null | undefined
 
-    // onPostChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
-
 }
 
 type MyPostsFormType = {
