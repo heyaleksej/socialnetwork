@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ProfileType } from "../components/Profile/ProfileInfo/ProfileInfo";
+import {LoginDataType} from "../Redux/authReducer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -35,12 +36,12 @@ export const AuthApi = {
         return instance.get( `auth/me`).then(response => response.data)
     },
 
-    login(email: string, password:string, rememberMe:boolean, captcha: string){
-        return instance.post('/auth/login',{email, password, rememberMe, captcha}).then(response =>response.data)
+    login(data: LoginDataType){
+        return instance.post('/auth/login', data).then(response =>response.data)
     },
 
-    logout(){
-        return instance.delete('/auth/login').then(response =>response.data)
+    logout() {
+        return instance.delete('/auth/login').then(response => response.data)
     }
 
 }

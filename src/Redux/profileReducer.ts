@@ -107,7 +107,7 @@ export const profileReducer = (state: initialStateType = initialState, action: P
             }
         }
         case ADD_PHOTO_SUCCESS:{
-            return {...state, profile: {...state.profile, photos: action.photos} as ProfileTypeFromServer}
+            return {...state, profile: {...state.profile, photos: action.photo} as ProfileTypeFromServer}
         }
         default:
             return state
@@ -128,7 +128,7 @@ export const setUserProfile = (profile: ProfileTypeFromServer) => {
 export const SetStatusAC =(status:string)=>({type: SET_STATUS, status} as const)
 export const updateStatusAC =(status: string)=>({type: UPDATE_STATUS, status} as const)
 export const deletePost = (postID:string)=>({type:DELETE_POST, postID} as const)
-export const addPhotoSuccess = (photos:any)=>({type:ADD_PHOTO_SUCCESS, photos} as const)
+export const addPhotoSuccess = (photo:any)=>({type:ADD_PHOTO_SUCCESS, photo} as const)
 
 export const getUserProfileTC = (userId: string): any => {
     return (

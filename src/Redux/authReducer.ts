@@ -25,6 +25,13 @@ export type initialStateType = {
 
 }
 
+export type LoginDataType ={
+    email: string,
+    password: string,
+    rememberMe: boolean,
+    captcha: string
+}
+
 let initialState: initialStateType = {
     id: undefined,
     login: null,
@@ -77,9 +84,9 @@ export const getAuthUserTC = (): any => {
     }
 }
 
-export const loginTC = (email: string, password: string, rememberMe: boolean, captcha: string): any => {
+export const loginTC = (data: LoginDataType): any => {
     return (dispatch: Dispatch<any>) => {
-        AuthApi.login(email, password, rememberMe, captcha).then(data => {
+        AuthApi.login(data).then(data => {
             if (data.resultCode === 0) {
                 dispatch(getAuthUserTC())
             } else {

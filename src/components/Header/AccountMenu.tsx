@@ -6,14 +6,12 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {NavLink, Redirect} from "react-router-dom";
-import Button from '@mui/material/Button';
 import s from "../Navbar/Nav.module.css";
 
 type AccountMenuPropsType ={
@@ -38,7 +36,6 @@ export default function AccountMenu(props:AccountMenuPropsType) {
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                <NavLink to="/profile" className={s.nav__link} activeClassName={s.active}>Main</NavLink>
                 <Tooltip title="Account settings">
                     <IconButton
                         onClick={handleClick}

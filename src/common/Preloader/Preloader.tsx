@@ -1,10 +1,17 @@
 import React from 'react';
-import loader from '../../common/img/Loading_icon.gif'
+import './Preloader.css';
 
 export const Preloader = () => {
+
     return (
-        <div>
-            <img src={loader} alt={'preloader'}/>
+        <div className='loader-wrap'>
+            <div className="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
-    );
-};
+    )
+}
+

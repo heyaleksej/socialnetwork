@@ -19,7 +19,10 @@ export const Header = (props: HeaderPropsType) => {
     return (
 
         <header className={s.header}>
-            <div className={s.wrap}>
+            <span className={s.MainTitle}>
+                Social Network
+            </span>
+            <span className={s.wrap}>
 
                 {props.isAuth
                     ? <AccountMenu logOut={props.logOut}
@@ -29,7 +32,7 @@ export const Header = (props: HeaderPropsType) => {
 
                     : <NavLink to={'/login'} className={s.login}>log in</NavLink>
                 }
-            </div>
+            </span>
         </header>
     )
 
