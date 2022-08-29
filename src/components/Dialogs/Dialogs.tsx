@@ -24,11 +24,10 @@ type DialogsFormType = {
 
 
 function Dialogs(props: DialogsPropsType) {
-    let dialogsElements = props.dialogs.map
-    (d => <span key={d.id} className={s.avatarImg}>
+    let dialogsElements = props.dialogs.map(d => <span key={d.id} className={s.dialogItem}>
         <Dialog name={d.name} id={d.id}/>
         <Avatar ava={d.ava}/>
-    </span>   // мапиться по диалогам
+    </span>   // мапимся по диалогам
     )
 
     let messagesElements = props.messages.map((m, index) => <Message key={index} text={m.text}/>)
@@ -36,8 +35,6 @@ function Dialogs(props: DialogsPropsType) {
     const MaxL = MaxLength(50)
 
     const finalClassName = `${s.btn}`
-
-
 
     const DialogsForm: React.FC<InjectedFormProps<DialogsFormType>> = (props) => {
         return <form className={s.box} onSubmit={props.handleSubmit}>
@@ -54,27 +51,22 @@ function Dialogs(props: DialogsPropsType) {
                 <SuperButton name={'Send' + ' ' + '\u27A4'} cn={finalClassName}/>
             </div>
         </form>
-
     }
     const DialogsReduxForm = reduxForm<DialogsFormType>({form: 'newMessage'})(DialogsForm)
 
-    const onSubmit = (values: any) => {
-        props.addMessage(values.newMessage)
-    }
-
-
+    const onSubmit = (values: any) => props.addMessage(values.newMessage)
 
     return (
         <div className={s.dialogsWrapper}>
             <div className={s.dialogs}>
-                <ul className={s.dialogList}>
+                <div className={s.dialogList}>
                     {dialogsElements}
-                </ul>
+                </div>
             </div>
             <div className={s.messages}>
-                <ul className={s.messageList}>
+                <div className={s.messageList}>
                     {messagesElements}
-                </ul>
+                </div>
                 <DialogsReduxForm  onSubmit={onSubmit}/>
             </div>
         </div>

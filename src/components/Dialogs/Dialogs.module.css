@@ -6,6 +6,26 @@
 .messageList{
     padding: 10px;
     list-style: none;
+    text-decoration: none;
+    border: 1px solid grey;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    height: 400px;
+    overflow-y: scroll;
+
+}
+
+.dialogItem{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dialog{
+    color: gold;
+}
+
+.name{
+    text-decoration: none;
 }
 
 .dialogs {
@@ -13,6 +33,8 @@
     margin-right: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
+    padding-left: 15px;
+
 }
 
 .messages {

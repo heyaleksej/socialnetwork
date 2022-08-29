@@ -16,10 +16,7 @@ export const UsersApi = {
         return instance.get(`users?page=${CurrentPage}&count=${pageSize}`).then(response => response.data)
     },
 
-    getUserProfile(userId: string){
-        return ProfileApi.getUserProfile(userId)
 
-    },
     followUser(id: string) {
         return instance.post(`follow/` + id, {}).then(response => response.data)
 
@@ -82,7 +79,6 @@ export const ProfileApi = {
 
 export const SecureApi = {
     getCaptchaUrl() {
-        debugger
         return instance.get(`security/get-captcha-url`).then(response => response.data);
     }
 }

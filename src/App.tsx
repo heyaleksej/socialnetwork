@@ -15,6 +15,7 @@ import {InitializeApp} from "./Redux/appReducer";
 import {Preloader} from "./common/Preloader/Preloader";
 import {withSuspense} from "./HOCs/WithSuspense";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import { Routes } from './components/Routes/Routes';
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -46,21 +47,8 @@ class App extends React.Component<any, any> {
                 <div className={s.container}>
                     <Nav/>
                     <div className={s.content}>
-
-                    <Switch>
-                            <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
-                            <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                            <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
-                            <Route path='/music' component={Music}/>
-                            <Route path='/news' component={News}/>
-                            <Route path='/settings' component={Settings}/>
-                            <Route path='/users' component={UsersContainer}/>
-                            <Route path='/login' component={Login}/>
-                            <Route path='*' render={() => <div>404</div>}/>
-                    </Switch>
+                       <Routes/>
                     </div>
-
-
                 </div>
             </div>
         )

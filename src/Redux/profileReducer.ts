@@ -1,7 +1,7 @@
 import {PostsType} from "./types";
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {ProfileApi, UsersApi} from "../DAL/api";
+import {ProfileApi} from "../DAL/api";
 import { ProfileType } from "../components/Profile/ProfileInfo/ProfileInfo";
 import { BaseThunkType } from "./redux-store";
 import { FormAction, stopSubmit } from "redux-form";
@@ -133,20 +133,13 @@ export const addPhotoSuccess = (photo:any)=>({type:ADD_PHOTO_SUCCESS, photo} as 
 export const getUserProfileTC = (userId: string): any => {
     return (
         (dispatch: Dispatch<ProfileActionsTypes>) => {
-            return UsersApi.getUserProfile(userId).then(data => {
+            return ProfileApi.getUserProfile(userId).then(data => {
                 dispatch(setUserProfile(data))
             })
           }
     )
 }
 
-// refactoring async
-//
-// export const getUserProfileTC = (userId: string): any => async (dispatch: Dispatch<ProfileActionsTypes>) => {
-//             const response:any = UsersApi.getUserProfile(userId)
-//             dispatch(setUserProfile(response.data))
-//
-// }
 
 export const getStatusTC = (userId: string): any =>{
     return (dispatch: Dispatch<ProfileActionsTypes>) =>{
@@ -159,8 +152,8 @@ export const getStatusTC = (userId: string): any =>{
 
 export const updateStatusTC = (status: string): any =>{
     return (dispatch: Dispatch<ProfileActionsTypes>) =>{
-        ProfileApi.updateStatus(status).then(response => {
-            if (response.data.resultCode === 0)
+        ProfileApi.updateStatus(status)
+            .then(response => { if (response.data.resultCode === 0)
             dispatch(SetStatusAC(status))
 
         })
@@ -173,9 +166,7 @@ export const addNewPhoto = (photo: File): any =>{
         ProfileApi.safePhoto(photo).then(response => {
             if (response.data.resultCode === 0)
                 dispatch(addPhotoSuccess(response.data.data.photos))
-
         })
-
     }
 }
 
