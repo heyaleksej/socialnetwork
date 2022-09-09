@@ -1,5 +1,5 @@
 .boxTextarea {
-    width: 70%;
+    padding: 17px 0 17px 0;
 }
 
 .input {
@@ -26,6 +26,7 @@
     font-family: Montserrat, sans-serif;
     border: 1px solid silver;
     outline: none;
+    min-width: 15vw;
     background: transparent;
     font-size: 14px;
     color: #a09e9e;

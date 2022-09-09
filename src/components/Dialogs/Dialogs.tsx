@@ -47,7 +47,7 @@ function Dialogs(props: DialogsPropsType) {
                        className={s.textarea}
                 />
             </div>
-            <div>
+            <div style={{padding:'17px 0'}}>
                 <SuperButton name={'Send' + ' ' + '\u27A4'} cn={finalClassName}/>
             </div>
         </form>

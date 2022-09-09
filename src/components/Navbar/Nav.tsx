@@ -36,11 +36,6 @@ const Nav = () => {
                         <h3 className={s.contactTitle}>News</h3>
                     </NavLink>
                 </li>
-                {/*<li className={s.item}>*/}
-                {/*    <NavLink to={'/settings'} className={s.nav__link} activeClassName={s.active}>*/}
-                {/*        */}
-                {/*    </NavLink>*/}
-                {/*</li>*/}
                 <li className={s.item}>
                     <NavLink to={'/users'} className={s.nav__link} activeClassName={s.active}>
                         <img className={s.contactIcon} src={users}/>
