@@ -1,8 +1,4 @@
-.item {
-    color: green;
-}
-
-.postBtn {
+.button {
     align-items: center;
     appearance: none;
     background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
@@ -12,6 +8,7 @@
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
+    min-width: 12vw;
     display: inline-flex;
     font-family: "JetBrains Mono", monospace;
     height: 48px;
@@ -33,39 +30,58 @@
     font-size: 18px;
 }
 
-.postBtn:focus {
+.button:focus {
     box-shadow: #3c4fe0 0 0 0 2px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
 }
 
-.postBtn:hover {
+.button:hover {
     box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
-.postBtn:active {
+.button:active {
     box-shadow: #3c4fe0 0 3px 7px inset;
     transform: translateY(2px);
 }
 
 
-.postBlock {
-    padding: 20px;
-    background: whitesmoke;
-    border-radius: 15px;
-    margin-top: 1%;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-}
 
-.posts {
-    margin-top: 10px;
-}
 
-.textarea{
-}
 
-.input {
-    margin: 0 auto;
-    direction: rtl;
+.red:hover {
+    background: #e32323;
+    box-shadow: 0 15px 20px rgba(124, 23, 59, 0.4);
+
+    color: white;
+    transform: translateY(-7px);
 
 
 }
+
+.disabled {
+    opacity: 0.5;
+}
+
+.disabled:hover {
+    transform: translateY(-0px);
+}
+
+.default{
+
+}
+
+
+
+@media screen and (max-width: 500px) {
+
+    .button {
+        letter-spacing: 0px;
+        width: 77px;
+        height: 43px;
+        border-radius: 25px;
+        margin: 1px 1px;
+        font-size: 11px;
+        font-weight: 800;
+    }}
+
+

@@ -32,15 +32,13 @@
 .container {
   display: flex;
   height: 100vh;
-  margin-top: 20px;
-  margin-right: 10%
-}
+  margin: 2% 15%;}
 
 .content {
   /*grid-area: content;*/
   position: relative;
   width: 70%;
-  margin-left: auto;
+  margin-left: 1%;
 }
 
 

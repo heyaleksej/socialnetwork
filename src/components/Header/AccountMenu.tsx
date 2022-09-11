@@ -90,19 +90,6 @@ export default function AccountMenu(props:AccountMenuPropsType) {
                     <Avatar src={props.ava}/> {props.login}
                 </MenuItem>
                 <Divider />
-                <MenuItem>
-                    <ListItemIcon>
-                        <PersonAdd fontSize="small" />
-                    </ListItemIcon>
-                    Add another account
-                </MenuItem>
-                <MenuItem>
-                    <ListItemIcon>
-                        <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                </MenuItem>
-
                 <MenuItem onClick={props.logOut}>
                     <ListItemIcon>
                         <Logout  fontSize="small" />

@@ -3,6 +3,7 @@ import {ContactsType} from "./ProfileInfo";
 import {InjectedFormProps, reduxForm} from "redux-form";
 import {createField, Input} from "../../../common/FormControl/FormControl";
 import s from './ProfileDataForm.module.css'
+import CustomButton from "../../CustomButton/CustomButton";
 
 
 export type PhotosType = {
@@ -26,35 +27,42 @@ type PropsType = {
 
 
 const ProfileData: FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({profile, handleSubmit, error}) => {
-    return <form onSubmit={handleSubmit} className={s.box}>
-        <button>save</button>
-        {error && <div className={s.error}>{error}</div>}
+    return <div className={s.box}>
+        <h3> About me: </h3>
+        <form onSubmit={handleSubmit} className={s.contact}>
+            {error && <div className={s.error}>{error}</div>}
 
-        <div>
-            <b>fullName</b>: {createField('Full name', 'fullName', [], Input
-        )}
-        </div>
-        <div>
-            <b>aboutMe</b>: {createField('что нибудь', 'aboutMe', [], Input
-        )}
-        </div>
-        <div>
-            <b>Looking for a job</b>:{createField('', 'lookingForAJob', [], Input, {type: 'checkbox'}
-        )}
-        </div>
-        <div>
-            <b> Skills </b>: {createField('Расскажите о своем опыте', 'lookingForAJobDescription', [], Input)}
-        </div>
-        <div>
-            <div className={s.contactsBox}><b> Contacts </b>: {profile && Object.keys(profile.contacts).map((key) => {
-                return <div key={key}>
-                    <b>{key}: {createField(key, 'contacts.' + key, [], Input)}</b>
-                </div>
+            <li>
+                <div>fullName</div>: {createField('Full name', 'fullName', [], Input
+            )}
+            </li>
+            <li>
+                <div>aboutMe</div>: {createField('text about u', 'aboutMe', [], Input
+            )}
+            </li>
 
-            })}
+            <li>
+                <div> Skills </div>: {createField('Расскажите о своем опыте', 'lookingForAJobDescription', [], Input)}
+            </li>
+            <li>
+                <div>Looking for a job:</div>{createField('', 'lookingForAJob', [], Input, {type: 'checkbox'}
+            )}
+            </li>
+            <div>
+                <h3> Contacts </h3>{profile && Object.keys(profile.contacts).map((key) => {
+                    return <div key={key}>
+                        <li>{key}: {createField(key, 'contacts.' + key, [], Input)}</li>
+                    </div>
+
+                })}
             </div>
-        </div>
-    </form>
+            <div className={s.btnSave}>
+                <CustomButton name={'Save'}/>
+            </div>
+        </form>
+
+
+    </div>
 }
 
 const ProfileDataFormWithRedux = reduxForm<ProfileType, PropsType>({form: 'edit-profile'})(ProfileData)

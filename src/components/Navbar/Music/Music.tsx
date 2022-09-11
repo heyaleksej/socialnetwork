@@ -3,8 +3,8 @@ import s from './Music.module.css'
 
 function Music() {
     return (
-        <div>
-            Music
+        <div className={s.content}>
+            <div className={s.title}>Music</div>
         </div>
     )
 }

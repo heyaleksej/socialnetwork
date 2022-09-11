@@ -1,5 +1,4 @@
 .boxTextarea {
-    padding: 17px 0 17px 0;
 }
 
 .input {
@@ -7,14 +6,12 @@
     padding: 5px;
     vertical-align: middle;
     max-width: 100%;
-    min-width: 490px;
     color: #666;
     border: 1px solid #eceff5;
     border-radius: 7px;
     transition: 0.2s ease-in-out;
     transition-property: color, background-color, border;
-    background-color: #f1f3f4;
-    margin-bottom: 15px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 
 .checkbox{

@@ -1,8 +1,8 @@
 import userimg from './../../common/img/Sample_User_Icon.png'
 import s from './Users.module.css'
 import React from "react";
-import {UserTypeFromServer} from "../../Redux/userReducer";
 import {NavLink} from 'react-router-dom';
+import CustomButton from "../CustomButton/CustomButton";
 
 type UserPropsType = {
     follow: (userID: string) => void,
@@ -12,24 +12,26 @@ type UserPropsType = {
 }
 
 export const User = ({followingInProgress, user, unfollow, follow}: UserPropsType) => {
-    return <div>
+    return <span className={s.userList}>
         <div>
             <NavLink to={`/profile/` + user.id}>
                 <img src={user.photos.small != null ? user.photos.small : userimg} className={s.img}/>
             </NavLink>
         </div>
+         <div className={s.status}>
+            <span>{user.name}</span>
+        </div>
         <div>
             {user.followed
-                ? <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+                ? <CustomButton disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
                     unfollow(user.id)
-                }}>unfollow</button>
-                : <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+                }} name={'unfollow'}/>
+                : <CustomButton disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
                     follow(user.id)
-                }}>follow</button>}
+                }} name={'follow'} />}
         </div>
-        <span>{user.name}</span>
-        <span>{user.status}</span>
-    </div>
+
+    </span>
 
 
 }

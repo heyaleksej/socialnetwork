@@ -6,8 +6,8 @@ import {DialogsType, MessageType} from "../../Redux/types";
 import Avatar from '../MiniAvatars/Avatar';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {MaxLength, RequiredField} from "../../Utils/Validators/Validators";
-import SuperButton from "../ SuperButton/SuperButton";
 import {Textarea} from "../../common/FormControl/FormControl";
+import CustomButton from '../CustomButton/CustomButton';
 
 type DialogsPropsType = {
     dialogs: Array<DialogsType>
@@ -48,7 +48,7 @@ function Dialogs(props: DialogsPropsType) {
                 />
             </div>
             <div style={{padding:'17px 0'}}>
-                <SuperButton name={'Send' + ' ' + '\u27A4'} cn={finalClassName}/>
+                <CustomButton name={'Send' + ' ' + '\u27A4'} cn={finalClassName}/>
             </div>
         </form>
     }

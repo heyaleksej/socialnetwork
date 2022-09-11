@@ -12,7 +12,7 @@ type PostType = {
 const Post = (props:PostType) => {
     return (
         <div className={s.wrap}>
-            {props.userPhoto && <img className={s.img} src={props.userPhoto}/>}
+            <div>{props.userPhoto && <img className={s.img} src={props.userPhoto}/>}</div>
             <div className={s.text}>{props.message}</div>
             <div className={s.likeBlock}>
                 <img className={s.likeBtn} src={heart}/>

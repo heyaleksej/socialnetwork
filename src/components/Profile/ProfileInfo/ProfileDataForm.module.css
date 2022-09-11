@@ -1,10 +1,25 @@
 .box {
-    background-color: white;
 }
 
 .error {
     color: red;
 }
 
-.contactsBox {
+.contact li {
+    display: flex;
+    justify-content: space-between;
+    max-height: 3vh;
+    align-items: center;
+    padding: 4%;
+    border-bottom: 1px solid gray;
+}
+
+.contact{
+    padding-bottom: 2vh;
+}
+
+.btnSave{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2vh;
 }

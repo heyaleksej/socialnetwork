@@ -44,7 +44,7 @@ let initialState = {
     messages: [
         {id: v1(), text: 'privetik'},
         {id: v1(), text: 'pochemu ignor'},
-        {id: v1(), text: 'da ladno'},
+        {id: v1(), text: 'they definitely should hire you!'},
         {id: v1(), text: ' i fuzherchiki'},
         {id: v1(), text: 'ponyal'}
     ] as MessageType[],

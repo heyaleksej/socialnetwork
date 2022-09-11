@@ -88,7 +88,7 @@ export const profileReducer = (state: initialStateType = initialState, action: P
                 like: 0
             }
             return {
-                ...state,  posts: [...state.posts, newPost]
+                ...state,  posts: [newPost, ...state.posts]
             }
         case SET_USER_PROFILE : {
             return {

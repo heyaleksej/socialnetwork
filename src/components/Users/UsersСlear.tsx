@@ -1,14 +1,16 @@
 import React from "react";
 import {UserTypeFromServer} from "../../Redux/userReducer";
-import {Paginator} from '../../Utils/Paginator';
 import {User} from "./User";
+import s from './Users.module.css'
+import Pagination from "@mui/material/Pagination";
+
 
 type UsersClearPropsType = {
     users: Array<UserTypeFromServer>
     CurrentPage: number
     totalCount: number
     pageSize: number
-    SetPageHandler: (m: number) => void
+    setPageHandler: (m: number) => void
     follow: (userID: string) => void,
     unfollow: (userID: string) => void
     followingInProgress: string[]
@@ -18,19 +20,31 @@ export const UsersClear = ({
                                totalCount,
                                pageSize,
                                CurrentPage,
-                               SetPageHandler,
+                               setPageHandler,
                                followingInProgress,
                                ...props
                            }: UsersClearPropsType) => {
 
-    return <div>
-        <Paginator CurrentPage={CurrentPage} SetPageHandler={SetPageHandler} pageSize={pageSize}
-                   totalCount={totalCount} PortionSize={10}/>
-        {props.users.map(m => <User key={m.id} unfollow={props.unfollow} follow={props.follow}
-                                    followingInProgress={followingInProgress} user={m}/>)}
+    const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPageHandler(value);
+    }
 
+    return <div className={s.usersPage}>
+
+        {props.users.map(m => <User key={m.id}
+                                    unfollow={props.unfollow}
+                                    follow={props.follow}
+                                    followingInProgress={followingInProgress}
+                                    user={m}/>)}
+        <div className={s.paginationBlock}>
+            <Pagination
+                showFirstButton showLastButton
+                shape="rounded"
+                count={Math.ceil(totalCount/pageSize)}
+                onChange={handleChangePage}
+            />
+        </div>
     </div>
-
 }
 
 export default UsersClear

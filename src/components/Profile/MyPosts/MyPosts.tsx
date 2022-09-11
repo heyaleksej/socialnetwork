@@ -5,7 +5,7 @@ import {PostsType} from "../../../Redux/types";
 import {reduxForm, Field, InjectedFormProps} from "redux-form";
 import {MaxLength, RequiredField} from "../../../Utils/Validators/Validators";
 import {Textarea} from "../../../common/FormControl/FormControl";
-import SuperButton from "../../ SuperButton/SuperButton";
+import CustomButton from '../../CustomButton/CustomButton';
 
 
 type MyPostsPropsType = {
@@ -31,9 +31,10 @@ const MyPosts = (props: MyPostsPropsType) => {
                        type={"input"}
                        name={'addForm'}
                        validate={[RequiredField, MaxL]}
+                       style={{background:'whitesmoke', padding:'1vh', height:'7vh', width:'50%', direction: 'ltr'}}
                 />
                 <div>
-                    <SuperButton name={"Add Post"} cn={'null'}/>
+                    <CustomButton name={"Add Post"} cn={s.postBtn}/>
                 </div>
 
             </div>

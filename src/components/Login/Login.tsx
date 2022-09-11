@@ -1,76 +1,7 @@
 // import {reduxForm, Field, InjectedFormProps} from "redux-form";
-// import React , {FC} from "react";
-// import {MaxLength, RequiredField} from "../../Utils/Validators/Validators";
 import {useDispatch, useSelector} from "react-redux";
 import {loginTC} from "../../Redux/authReducer";
-// import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../Redux/redux-store";
-// import s from './../CustomInput/CustomForms.module.css'
-// import {createField, Input} from "../../common/FormControl/FormControl";
-//
-//
-// export const Login = () => {
-//
-
-//
-//     const onSubmit = (formData: FormDataType) => {
-//         dispatch(loginTC(formData.email, formData.password, formData.rememberMe, formData.captcha))
-//     }
-//
-//
-//     if (isAuth) return <Redirect to={'/profile'}/>
-//
-//     return (
-//         <div>
-//         <h1>Login</h1>
-//         <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
-//     </div>
-//     )
-// }
-//
-// type FormDataType = {
-//     captcha: string
-//     email: string
-//     password: string
-//     rememberMe: boolean
-// }
-//
-// type LoginFormProps = {
-//     captchaUrl: string | null
-// }
-//
-// const MaxL = MaxLength(25)
-//
-//
-//
-// const LoginForm: FC<InjectedFormProps<FormDataType, LoginFormProps> & LoginFormProps> = ({error, handleSubmit,captchaUrl}) => {
-//     return <form onSubmit={handleSubmit}>
-//         <div>
-//             <Field type={'input'} placeholder={"login..."} component={Input} name={'email'}
-//                    validate={[RequiredField, MaxL]}
-//             />
-//         </div>
-//         <div>
-//             <Field type={'input'} types={'password'} placeholder={'password...'} component={Input}
-//                    name={'password'}
-//                    validate={[RequiredField, MaxL]}/>
-//
-//         </div>
-//         <div>
-//             <span>remember me <Field type={"checkbox"} component={Input} name={'rememberMe'}/></span>
-//         </div>
-
-//         <div>
-//             <button type={'submit'}> Log in</button>
-//         </div>
-//     </form>
-// }
-//
-
-
-
-// export default connect(null, {loginTC})(Login)
-
 import React from 'react'
 import Grid from '@mui/material/Grid';
 import Checkbox from '@mui/material/Checkbox';
@@ -78,10 +9,10 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import s from './Login.module.css'
 import {NavLink, Redirect} from "react-router-dom";
+import CustomButton from "../CustomButton/CustomButton";
 
 type FormikErrorType = {
     email?: string
@@ -97,7 +28,7 @@ export const Login = () => {
 
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-            e.preventDefault();
+        e.preventDefault();
 
     };
 
@@ -121,8 +52,8 @@ export const Login = () => {
             }
             if (!values.password) {
                 errors.password = 'Password is required';
-            } else if (values.password.length <=7) {
-                errors.password = 'Password should be more than 8 symbols';
+            } else if (values.password.length <= 3) {
+                errors.password = 'Password should be more than 4 symbols';
             }
             return errors;
         },
@@ -133,7 +64,7 @@ export const Login = () => {
     }
 
     return (
-        <Grid  container justifyContent={'center'}>
+        <Grid container justifyContent={'center'} className={s.form}>
             <Grid item justifyContent={'center'}>
                 <form onSubmit={formik.handleSubmit}>
                     <FormControl>
@@ -165,16 +96,63 @@ export const Login = () => {
                             }/>
 
 
-                            <Button color="secondary" type={'submit'} variant={'contained'}>
-                                Login
-                            </Button>
-                            <div style={{color: "grey"}} className={s.forgotPassword}>Don't have an account?</div>
-                            <NavLink className={s.forgotPassword} to={'reg'} onClick={handleClick}>Sign Up</NavLink>
+                            <CustomButton type={'submit'} name={'LOG IN'}/>
                         </FormGroup>
                     </FormControl>
                 </form>
             </Grid>
         </Grid>
     )
-};
+}
+
+
+// with redux form
+// export const Login = () => {
+//     const onSubmit = (formData: FormDataType) => {
+//         dispatch(loginTC(formData.email, formData.password, formData.rememberMe, formData.captcha))
+//     }
+//     if (isAuth) return <Redirect to={'/profile'}/>
+//
+//     return (
+//         <div>
+//         <h1>Login</h1>
+//         <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+//     </div>
+//     )
+// }
+//
+// type FormDataType = {
+//     captcha: string
+//     email: string
+//     password: string
+//     rememberMe: boolean
+// }
+//
+// type LoginFormProps = {captchaUrl: string | null}
+// const MaxL = MaxLength(25)
+//
+//
+//
+// const LoginForm: FC<InjectedFormProps<FormDataType, LoginFormProps> & LoginFormProps> = ({error, handleSubmit,captchaUrl}) => {
+//     return <form onSubmit={handleSubmit}>
+//         <div>
+//             <Field type={'input'} placeholder={"login..."} component={Input} name={'email'}
+//                    validate={[RequiredField, MaxL]}
+//             />
+//         </div>
+//         <div>
+//             <Field type={'input'} types={'password'} placeholder={'password...'} component={Input}
+//                    name={'password'}
+//                    validate={[RequiredField, MaxL]}/>
+//         </div>
+//         <div>
+//             <span>remember me <Field type={"checkbox"} component={Input} name={'rememberMe'}/></span>
+//         </div>
+//         <div>
+//             <button type={'submit'}> Log in</button>
+//         </div>
+//     </form>
+// }
+//
+// export default connect(null, {loginTC})(Login)};
 

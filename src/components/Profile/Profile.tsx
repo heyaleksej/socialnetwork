@@ -3,6 +3,7 @@ import {ProfileInfo, ProfileType} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 import {ProfileTypeFromServer} from "../../Redux/profileReducer";
 import s from './Profile.module.css'
+import a from './../../App.module.css'
 
 type ProfilePropsType = {
     profile?: ProfileTypeFromServer | null

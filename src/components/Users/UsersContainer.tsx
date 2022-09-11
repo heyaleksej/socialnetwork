@@ -51,7 +51,7 @@ class UsersClass extends React.Component<UsersPropsType> {
         this.props.getUsers(CurrentPage, pageSize)
     }
 
-    SetPageHandler = (page: number) => {
+    setPageHandler = (page: number) => {
         this.props.getUsers(page, this.props.pageSize)
 
     }
@@ -66,7 +66,7 @@ class UsersClass extends React.Component<UsersPropsType> {
                         totalCount={this.props.totalCount}
                         pageSize={this.props.pageSize}
                         CurrentPage={this.props.CurrentPage}
-                        SetPageHandler={this.SetPageHandler}
+                        setPageHandler={this.setPageHandler}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
                         followingInProgress={this.props.followingInProgress}
