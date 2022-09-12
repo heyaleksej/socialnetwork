@@ -13,6 +13,7 @@ import {useFormik} from "formik";
 import s from './Login.module.css'
 import {NavLink, Redirect} from "react-router-dom";
 import CustomButton from "../CustomButton/CustomButton";
+import { FormLabel } from "@mui/material";
 
 type FormikErrorType = {
     email?: string
@@ -66,7 +67,21 @@ export const Login = () => {
     return (
         <Grid container justifyContent={'center'} className={s.form}>
             <Grid item justifyContent={'center'}>
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={formik.handleSubmit} style={{display:'flex', alignItems:'center'}}>
+                    <FormLabel>
+                        <p>
+                            To log in get registered <a href={'https://social-network.samuraijs.com/'}
+                                                        target={'_blank'}>here</a>
+                        </p>
+                        <p>
+                            or use common test account credentials:
+                        </p>
+                        <p> Email: free@samuraijs.com
+                        </p>
+                        <p>
+                            Password: free
+                        </p>
+                    </FormLabel>
                     <FormControl>
                         <FormGroup className={s.login}>
                             <h2 style={{textAlign: "center"}}>Sign In</h2>

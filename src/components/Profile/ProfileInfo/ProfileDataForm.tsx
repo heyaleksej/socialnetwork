@@ -33,16 +33,16 @@ const ProfileData: FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = (
             {error && <div className={s.error}>{error}</div>}
 
             <li>
-                <div>fullName</div>: {createField('Full name', 'fullName', [], Input
+                <div>fullName:</div> {createField('Full name', 'fullName', [], Input
             )}
             </li>
             <li>
-                <div>aboutMe</div>: {createField('text about u', 'aboutMe', [], Input
+                <div>aboutMe:</div> {createField('text about u', 'aboutMe', [], Input
             )}
             </li>
 
             <li>
-                <div> Skills </div>: {createField('Расскажите о своем опыте', 'lookingForAJobDescription', [], Input)}
+                <div> Skills:</div> {createField('Расскажите о своем опыте', 'lookingForAJobDescription', [], Input)}
             </li>
             <li>
                 <div>Looking for a job:</div>{createField('', 'lookingForAJob', [], Input, {type: 'checkbox'}

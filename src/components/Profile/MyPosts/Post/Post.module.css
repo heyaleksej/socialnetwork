@@ -27,6 +27,8 @@
 .likeBtn {
     width: 30px;
     cursor: pointer;
+    fill: white;
+    padding-right: 5%;
 }
 
 .likeNum {

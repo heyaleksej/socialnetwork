@@ -128,7 +128,7 @@ export function ProfileInfo({profile, saveProfile, isOwner, ...props}: ProfileIn
                         {isOwner && editMode &&
                         <IconButton
                             className={s.editAvatarBtn}
-                            sx={{color: 'grey', display:'flex' ,justifyContent:'center'}}
+                            sx={{color: 'grey', display:'flex' ,justifyContent:'center', width: 'max-content', margin: 'auto'}}
                             aria-label="upload picture"
                             component="label"
                         >
