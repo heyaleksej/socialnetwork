@@ -67,7 +67,7 @@ export const Login = () => {
     return (
         <Grid container justifyContent={'center'} className={s.form}>
             <Grid item justifyContent={'center'}>
-                <form onSubmit={formik.handleSubmit} style={{display:'flex', alignItems:'center'}}>
+                <form onSubmit={formik.handleSubmit} className={s.loginForm}>
                     <FormLabel>
                         <p>
                             To log in get registered <a href={'https://social-network.samuraijs.com/'}

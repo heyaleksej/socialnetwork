@@ -37,9 +37,24 @@
 .content {
   /*grid-area: content;*/
   position: relative;
-  width: 75%;
+  width: 70%;
   margin-left: 1%;
 }
 
+
+@media screen and (max-width: 550px){
+  .container {
+    display: unset;
+    width: 100%;
+    margin: 0;
+  }
+
+  .content {
+    width: unset;
+    margin-top: 1%;
+    margin-left: 0;
+  }
+
+}
 
 

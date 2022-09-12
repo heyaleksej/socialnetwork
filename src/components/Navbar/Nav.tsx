@@ -25,6 +25,12 @@ const Nav = () => {
                     </NavLink>
                 </li>
                 <li className={s.item}>
+                    <NavLink to={'/friends'} className={s.nav__link} activeClassName={s.active}>
+                        <img className={s.contactIcon} src={news}/>
+                        <h3 className={s.contactTitle}>Friends</h3>
+                    </NavLink>
+                </li>
+                <li className={s.item}>
                     <NavLink to={'/music'} className={s.nav__link} activeClassName={s.active}>
                         <img className={s.contactIcon} src={music}/>
                         <h3 className={s.contactTitle}>Music</h3>

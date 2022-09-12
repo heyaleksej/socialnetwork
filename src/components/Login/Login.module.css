@@ -94,7 +94,24 @@ input[type=checkbox]:checked:after {
     padding-top: 50px;
 }
 
+.loginForm{
+    display: flex;
+    align-items: center;
+}
+
 .captchaImg {
     width: 140px;
     height: 60px;
 }
+@media screen and (max-width: 550px) {
+
+.form{
+    height: max-content;
+    position: absolute;
+    top: -70vh;
+}
+    .loginForm{
+        display: block;
+    }
+}
+

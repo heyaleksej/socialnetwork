@@ -1,4 +1,10 @@
 .boxTextarea {
+    height: 4vh;
+    padding: 2vh 0;
+}
+
+.messArea{
+    height: 9vh;
 }
 
 .input {
@@ -30,6 +36,8 @@
     resize: initial;
     border-radius: 5px;
     overflow-y: visible;
+    height: 8vh;
+
 }
 
 .formControl.error textarea,
@@ -48,4 +56,26 @@
 .formErrorSummary {
     color: red;
     border-radius: 5px;
+}
+
+@media screen and (min-width: 1600px) and (min-height: 800px){
+    .boxTextarea {
+        height: 2vh;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1599px) and (min-height: 768px){
+    .boxTextarea {
+        height: 3vh;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .input{
+        width: 50vw;
+    }
+
+    .textarea{
+        width: 50vw;
+    }
 }

@@ -1,7 +1,7 @@
 .button {
     align-items: center;
     appearance: none;
-    background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+    background-image: radial-gradient(100% 100% at 100% 0, #50a785 0, rgba(88, 196, 141, 0.5) 100%);
     border: 0;
     border-radius: 6px;
     box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
@@ -31,16 +31,16 @@
 }
 
 .button:focus {
-    box-shadow: #3c4fe0 0 0 0 2px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    box-shadow: rgba(125, 232, 119, 0.5) 0 0 0 2px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(125, 232, 119, 0.5) 0 -3px 0 inset;
 }
 
 .button:hover {
-    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+    box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 129, 93, 0.5) 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
 .button:active {
-    box-shadow: #3c4fe0 0 3px 7px inset;
+    box-shadow: rgba(125, 232, 119, 0.5) 0 3px 7px inset;
     transform: translateY(2px);
 }
 
@@ -76,12 +76,12 @@
 
     .button {
         letter-spacing: 0px;
-        width: 77px;
+        width: unset;
         height: 43px;
-        border-radius: 25px;
-        margin: 1px 1px;
+        border-radius: 10px;
         font-size: 11px;
         font-weight: 800;
+        margin:15px;
     }}
 
 

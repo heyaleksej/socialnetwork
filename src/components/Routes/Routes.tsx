@@ -8,6 +8,8 @@ import News from "../Navbar/News/News";
 import Settings from "../Navbar/Settings/Settings";
 import {UsersContainer} from "../Users/UsersContainer";
 import {Login} from "../Login/Login";
+import Friends from "../Users/Friends/Friends";
+import {FriendsContainer} from "../Users/Friends/FriendsContainer";
 
 
 export const Routes = () => {
@@ -19,6 +21,7 @@ export const Routes = () => {
             <Route path='/music' component={Music}/>
             <Route path='/news' component={News}/>
             <Route path='/settings' component={Settings}/>
+            <Route path='/friends' component={FriendsContainer}/>
             <Route path='/users' component={UsersContainer}/>
             <Route path='/login' component={Login}/>
             <Route path='*' render={() => <div>404</div>}/>

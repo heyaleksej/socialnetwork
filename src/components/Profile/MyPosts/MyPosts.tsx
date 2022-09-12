@@ -31,10 +31,9 @@ const MyPosts = (props: MyPostsPropsType) => {
                        type={"input"}
                        name={'addForm'}
                        validate={[RequiredField, MaxL]}
-                       style={{background:'whitesmoke', padding:'1vh', height:'7vh', width:'50%', direction: 'ltr'}}
                 />
-                <div>
-                    <CustomButton name={"Add Post"} cn={s.postBtn}/>
+                <div className={s.postBtnWrap}>
+                    <CustomButton name={"Add Post"} />
                 </div>
 
             </div>

@@ -4,7 +4,7 @@
     padding: 30px 20px;
     margin-bottom: 20px;
     background: #ffffff;
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: 0 0 20px 0 rgba(44, 101, 144, 0.1);
 }
 
@@ -36,8 +36,18 @@
     font-size: 15px;
 }
 
-.likeBlock{
+.likeBlock {
     display: flex;
     position: absolute;
     left: 85%;
+}
+
+@media screen and (max-width: 550px) {
+    .likeBlock {
+        left: 80%;
+    }
+
+    .likeBtn {
+        padding-right: 15%;
+    }
 }

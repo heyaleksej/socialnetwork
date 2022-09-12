@@ -7,6 +7,10 @@
 
 }
 
+.messArea{
+    height: 9vh;
+}
+
 .dialogList{
     padding: 10px;
     border: 1px solid grey;
@@ -76,6 +80,7 @@
     background-color: #fff;
     display: flex;
     justify-content: space-around ;
+    align-items: center;
     border: 1px solid gray;
     border-radius: 15px;
     padding: 1%;
@@ -83,8 +88,7 @@
 }
 
 .textarea {
-    height: 45px;
-    line-height: 45px;
+    height: 7vh;
     padding: 5px;
     margin-top: 10px;
     background: transparent;
@@ -109,6 +113,8 @@
     outline: none;
     border: none;
     cursor: pointer;
+    height: 6vh;
+
 }
 
 .btn::before {
@@ -117,4 +123,18 @@
     width: 20px;
     height: 20px;
     left: 5px;
+}
+
+@media screen and (max-width: 550px) {
+.messages{
+    width: 100%;
+}
+
+    .dialogList{
+        display: none;
+    }
+
+    .dialogs{
+        display: none;
+    }
 }

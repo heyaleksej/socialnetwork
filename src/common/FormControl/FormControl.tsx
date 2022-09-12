@@ -31,7 +31,7 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
 const FormControl: React.FC<FormControlPropsType> = ({meta: {touched, error}, children, ...props}) => {
     const hasError = touched && error
     return (
-        <div className={`${style.boxTextarea} ${style.formControl} ${hasError ? style.error : ''}`}>
+        <div className={`${style.formControl} ${hasError ? style.error : ''}`}>
             <div>
                 {children}
             </div>

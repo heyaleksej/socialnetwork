@@ -34,3 +34,9 @@
 .currentPage {
     font-weight: bold;
 }
+
+@media screen and (max-width: 550px) {
+.userList div{
+    width: 21vw;
+}
+}

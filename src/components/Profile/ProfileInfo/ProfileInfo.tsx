@@ -63,7 +63,7 @@ export const Contact = ({contactTitle, contactValue}: ContactsPropsType) => {
 
 
 const ProfileData = ({profile}: ProfileDataPropsType) => {
-    return <div>
+    return <div className={s.test}>
         <h3> About me: </h3>
         <li>
             <b>Full name</b>:{profile.fullName}

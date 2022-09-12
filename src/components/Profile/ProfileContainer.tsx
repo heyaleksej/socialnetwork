@@ -7,6 +7,8 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {RedirectIfNotAuth} from "../../HOCs/RedirectIfNotAuth";
 import { compose } from 'redux';
 import {ProfileType} from "./ProfileInfo/ProfileInfo";
+import {followTC, unFollowTC} from "../../Redux/userReducer";
+import {getFollowingInProgress} from "../Users/userSelector";
 
 type MapStatePropsType = initialStateType
 
@@ -16,6 +18,8 @@ type mapDispatchPropsType = {
     updateStatusTC:(status:string)=>void
     addNewPhoto:(file:any)=>void
     saveProfile: (profile: ProfileType) => Promise<any>
+    follow: (userID: string) => void,
+    unfollow: (userID: string) => void
 
 
 }
@@ -62,8 +66,6 @@ class ProfileContainer extends React.Component<WithRouterPropsType> {
                      updateStatusTC={this.props.updateStatusTC}
                      addNewPhoto={this.props.addNewPhoto}
                      saveProfile={this.props.saveProfile}
-
-
             />
         );
 
@@ -77,7 +79,8 @@ let mapToStateToProps = (state: AppStateType): MapStatePropsType => {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
         isAuth: state.auth.isAuth,
-        authId: state.auth.id
+        authId: state.auth.id,
+
     }
 
 }
@@ -85,6 +88,6 @@ let mapToStateToProps = (state: AppStateType): MapStatePropsType => {
 // let URLDataContCompAuth = RedirectIfNotAuth(URLDataContComp)
 
 export default compose<React.ComponentType>(RedirectIfNotAuth,
-    connect(mapToStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC, addNewPhoto, saveProfile}),
+    connect(mapToStateToProps, {getUserProfileTC, getStatusTC, updateStatusTC, addNewPhoto, saveProfile, followTC, unFollowTC}),
     withRouter)
 (ProfileContainer) as React.FunctionComponent<any>

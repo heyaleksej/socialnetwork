@@ -38,17 +38,17 @@ function Dialogs(props: DialogsPropsType) {
 
     const DialogsForm: React.FC<InjectedFormProps<DialogsFormType>> = (props) => {
         return <form className={s.box} onSubmit={props.handleSubmit}>
-            <div>
+            <div style={{display:'flex'}}>
                 <Field placeholder={"Enter message..."}
                        component={Textarea}
                        type="textarea"
                        name={'newMessage'}
                        validate={[RequiredField, MaxL]}
-                       className={s.textarea}
+                       className={`${s.textarea}+${s.messArea}`}
                 />
             </div>
             <div style={{padding:'17px 0'}}>
-                <CustomButton name={'Send' + ' ' + '\u27A4'} cn={finalClassName}/>
+                <CustomButton name={'Send' + ' ' + '\u27A4'}/>
             </div>
         </form>
     }
