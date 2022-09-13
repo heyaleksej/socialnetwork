@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/socialnetwork/static/css/main.0a0be143.chunk.css",
-    "main.js": "/socialnetwork/static/js/main.b10cd209.chunk.js",
-    "main.js.map": "/socialnetwork/static/js/main.b10cd209.chunk.js.map",
+    "main.js": "/socialnetwork/static/js/main.e7c05b74.chunk.js",
+    "main.js.map": "/socialnetwork/static/js/main.e7c05b74.chunk.js.map",
     "runtime-main.js": "/socialnetwork/static/js/runtime-main.3678e370.js",
     "runtime-main.js.map": "/socialnetwork/static/js/runtime-main.3678e370.js.map",
     "static/js/2.105c95cd.chunk.js": "/socialnetwork/static/js/2.105c95cd.chunk.js",
@@ -21,12 +21,13 @@
     "static/media/pencil-svgrepo-com.351296e5.svg": "/socialnetwork/static/media/pencil-svgrepo-com.351296e5.svg",
     "static/media/radio-svgrepo-com.16fa2fba.svg": "/socialnetwork/static/media/radio-svgrepo-com.16fa2fba.svg",
     "static/media/index.css": "/socialnetwork/static/media/seamless-min.af335f76.jpg",
-    "static/media/speech-svgrepo-com.128e919b.svg": "/socialnetwork/static/media/speech-svgrepo-com.128e919b.svg"
+    "static/media/speech-svgrepo-com.128e919b.svg": "/socialnetwork/static/media/speech-svgrepo-com.128e919b.svg",
+    "static/media/users-user-svgrepo-com.cbf9e3ff.svg": "/socialnetwork/static/media/users-user-svgrepo-com.cbf9e3ff.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.3678e370.js",
     "static/js/2.105c95cd.chunk.js",
     "static/css/main.0a0be143.chunk.css",
-    "static/js/main.b10cd209.chunk.js"
+    "static/js/main.e7c05b74.chunk.js"
   ]
 }
