@@ -6,6 +6,7 @@ import mess from './../../common/img/sideabar/chat-svgrepo-com.svg'
 import music from './../../common/img/sideabar/radio-svgrepo-com.svg'
 import news from './../../common/img/sideabar/news-svgrepo-com.svg'
 import users from './../../common/img/sideabar/job-search-svgrepo-com.svg'
+import friends from './../../common/img/sideabar/users-user-svgrepo-com.svg'
 
 
 const Nav = () => {
@@ -26,7 +27,7 @@ const Nav = () => {
                 </li>
                 <li className={s.item}>
                     <NavLink to={'/friends'} className={s.nav__link} activeClassName={s.active}>
-                        <img className={s.contactIcon} src={news}/>
+                        <img className={s.contactIcon} src={friends}/>
                         <h3 className={s.contactTitle}>Friends</h3>
                     </NavLink>
                 </li>

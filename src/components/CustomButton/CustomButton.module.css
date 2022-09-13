@@ -44,18 +44,12 @@
     transform: translateY(2px);
 }
 
-
-
-
-
 .red:hover {
     background: #e32323;
     box-shadow: 0 15px 20px rgba(124, 23, 59, 0.4);
 
     color: white;
     transform: translateY(-7px);
-
-
 }
 
 .disabled {
@@ -65,12 +59,6 @@
 .disabled:hover {
     transform: translateY(-0px);
 }
-
-.default{
-
-}
-
-
 
 @media screen and (max-width: 500px) {
 
