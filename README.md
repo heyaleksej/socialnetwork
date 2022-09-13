@@ -36,17 +36,17 @@ The example application is a social blogging site. It uses a custom API for all 
 **The general page breakdown looks like this:**
 
 - Sign in/Sign up pages (URL: /#/login)
-  ![Image alt](https://github.com/heyaleksej/socialnetwork/tree/2.0/src/common/img/signin.png)
-- Settings page (URL: /#/settings )
-- Editor page to create/edit articles (URL: /#/editor, /#/editor/article-slug-here )
+  ![Image alt](https://github.com/heyaleksej/socialnetwork/blob/2.0/src/common/img/signin.png?raw=true)
+- Settings page
+- Edit contact data
 - Profile page (URL: /#/@profile )
-  ![Image alt](https://github.com/heyaleksej/socialnetwork/tree/2.0/src/common/img/profile.png)
+  ![Image alt](https://github.com/heyaleksej/socialnetwork/blob/2.0/src/common/img/profile.png?raw=true)
 - Posts with likes count
-- ![Image alt](https://github.com/heyaleksej/socialnetwork/tree/2.0/src/common/img/posts.png)
+- ![Image alt](https://github.com/heyaleksej/socialnetwork/blob/master/src/common/img/posts.png?raw=true)
 - DialogsPage (layout)
-- ![Image alt](https://github.com/heyaleksej/socialnetwork/tree/2.0/src/common/img/mess.png)
+- ![Image alt](https://github.com/heyaleksej/socialnetwork/blob/master/src/common/img/mess.png?raw=true)
 - Find users with pagination
-- ![Image alt](https://github.com/heyaleksej/socialnetwork/tree/2.0/src/common/img/usersPagination.png)
+- ![Image alt](https://github.com/heyaleksej/socialnetwork/blob/2.0/src/common/img/usersPagination.png?raw=true)
 
     
 
